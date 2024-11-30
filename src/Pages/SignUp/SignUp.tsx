@@ -64,6 +64,7 @@ export default function SignUp() {
         margin: "0 auto",
         height: "100vh",
         alignContent: "center",
+        background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
       }}
     >
       <Heading

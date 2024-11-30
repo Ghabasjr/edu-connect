@@ -15,7 +15,7 @@ export default function SubjectCategory() {
         sx={{
           padding: "10px",
           gap: "10px",
-          backgroundColor: "#9fc5e8, #f2f2f2",
+          background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
           maxWidth: 400,
           margin: "auto auto",
           alignContent: "center",

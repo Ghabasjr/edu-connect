@@ -17,43 +17,45 @@ export default function WelcomePage() {
       <Box
         sx={{
           fontFamily: "sans-serif",
-          maxWidth: 400,
-          margin: "auto auto",
-          alignContent: "center",
+          maxWidth: "100%",
+          margin: "0 auto",
           height: "100vh",
+          padding: ["20px", "30px", "40px"],
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "center",
-          padding: "10px",
+          background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
+          backgroundRepeat: "no-repeat",
         }}
       >
+        {/* Logo Section */}
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            mt: 30,
+            mt: [10, 15, 20],
           }}
         >
           <img
             src="/Logo/Education logo.png"
             alt="Graduation Hat"
             style={{
-              width: "100px",
-              height: "100px",
+              width: "80px",
+              height: "80px",
             }}
           />
         </Box>
-        <Box>
+
+        {/* Heading Section */}
+        <Box sx={{ textAlign: "center", mt: [15, 20, 30] }}>
           <Heading
             sx={{
               color: "black",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              textAlign: "center",
-              flexWrap: "wrap", // Allows wrapping if content overflows
-              width: ["100%", "100%", "100%"],
-              padding: "20px",
-              marginTop: "70px",
+              fontSize: [3, 4, 5],
+              lineHeight: "1.4",
+              padding: ["10px", "20px", "30px"],
             }}
           >
             WELCOME
@@ -63,15 +65,15 @@ export default function WelcomePage() {
               style={{
                 width: "20px",
                 height: "25px",
-                marginLeft: "8px", // Adds spacing between the text and the icon
+                marginLeft: "8px",
               }}
             />
+            TO
             <br />
-            TO <br />
             <Box
+              as="span"
               sx={{
-                display: "flex",
-                justifyContent: "center",
+                display: "inline-flex",
                 alignItems: "center",
               }}
             >
@@ -79,94 +81,91 @@ export default function WelcomePage() {
                 src="/Logo/mortarboard.png"
                 style={{
                   width: "20px",
-                  height: "25px",
+                  height: "18px",
                   marginRight: "8px",
                 }}
               />
             </Box>
             EDUCONNECT
           </Heading>
+          <Text
+            sx={{
+              fontSize: [1, 2, 3],
+              color: "black",
+              mt: "10px",
+            }}
+          >
+            Your academic home
+          </Text>
         </Box>
-        <Text
+
+        {/* Button Section */}
+        <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            textAlign: "center",
-            width: ["100%", "100%", "100%"],
-            backgroundColor: "",
-            mt: "10px",
-            mb: 10,
+            gap: [3, 4, 4],
+            mt: [20, 30, 40],
+            width: "100%",
+            maxWidth: "400px",
           }}
         >
-          A space for all knowledge
-        </Text>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 10 }}>
           <Button
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               backgroundColor: "white",
               color: "black",
               border: "1px solid",
               borderRadius: "8px",
               width: "100%",
               padding: "12px",
-              fontSize: "16px",
-              cursor: "pointer",
-              marginBottom: "10px",
+              fontSize: [1, 2, 3],
               fontWeight: 600,
+              cursor: "pointer",
             }}
             onClick={handleSignIn}
-            type="submit"
           >
             SIGN IN
           </Button>
           <Button
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               backgroundColor: "white",
               color: "black",
               border: "1px solid",
               borderRadius: "8px",
               width: "100%",
               padding: "12px",
-              fontSize: "16px",
-              cursor: "pointer",
-              marginBottom: "10px",
+              fontSize: [1, 2, 3],
               fontWeight: 600,
+              cursor: "pointer",
             }}
-            onClick={handleSignUp} // Handle the click event
-            type="button"
+            onClick={handleSignUp}
           >
             SIGN UP
           </Button>
         </Box>
+
+        {/* Footer Section */}
         <Box
           sx={{
             display: "flex",
             flexDirection: "row",
-            alignItems: "center",
             justifyContent: "space-between",
-            mt: 20,
-            padding: "20px",
+            alignItems: "center",
+            width: "100%",
+            maxWidth: "400px",
+            mt: [10, 15, 20],
           }}
         >
-          <Box>
-            <img
-              src="/Logo/formula.png"
-              style={{ width: "50px", height: "50px" }}
-            />
-          </Box>
-          <Box />
-          <Box>
-            <img
-              src="/Logo/science.png"
-              style={{ width: "50px", height: "50px" }}
-            />
-          </Box>
+          <img
+            src="/Logo/formula.png"
+            alt="Formula Icon"
+            style={{ width: "40px", height: "40px" }}
+          />
+          <img
+            src="/Logo/science.png"
+            alt="Science Icon"
+            style={{ width: "40px", height: "40px" }}
+          />
         </Box>
       </Box>
     </>

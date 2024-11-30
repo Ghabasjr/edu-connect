@@ -7,7 +7,7 @@ type HorizontalProps = {
 };
 
 const HorizontalLine: React.FC<HorizontalProps> = ({
-  borderColor = "gray",
+  borderColor = "black",
 }) => {
   return (
     <Box

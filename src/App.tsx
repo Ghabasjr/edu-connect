@@ -8,6 +8,7 @@ import SignUp2 from "./Pages/SignUp2/SignUp2";
 import EmailVerification from "./Pages/EmailVerification/EmailVerification";
 import SubjectCategory from "./Pages/SubjectCategory/SubjectCategory";
 import ProfileSetup from "./Pages/ProfileSetup/ProfileSetup";
+import DashBoard from "./Components/DashBoard/DashBoard";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/subject-category" element={<SubjectCategory />} />
         <Route path="/profile-setup" element={<ProfileSetup />} />
+        <Route path="/dash-board" element={<DashBoard />} />
       </Routes>
     </BrowserRouter>
   );

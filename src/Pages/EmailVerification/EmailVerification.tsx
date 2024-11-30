@@ -9,6 +9,7 @@ function EmailVerification() {
           margin: "auto auto",
           alignContent: "center",
           height: "100vh",
+          background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
         }}
       >
         <Box

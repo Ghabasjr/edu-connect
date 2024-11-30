@@ -31,6 +31,7 @@ export default function SignUp2() {
           alignContent: "center",
           height: "100vh",
           alignItems: "center",
+          background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
         }}
       >
         <Box
