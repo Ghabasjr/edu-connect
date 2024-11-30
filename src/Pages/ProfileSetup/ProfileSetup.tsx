@@ -19,8 +19,8 @@ function ProfileSetup() {
     width: "100%",
   };
   const imgStyles = {
-    background: "white",
-    backgroundColor: "white",
+    // background: "white",
+    // backgroundColor: "white",
   };
 
   return (
@@ -54,7 +54,7 @@ function ProfileSetup() {
             <img
               src="/Logo/camera.png"
               alt="Profile Setup Icon"
-              sx={imgStyles}
+              style={imgStyles}
             />
           </Button>
         </Box>
