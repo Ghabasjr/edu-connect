@@ -145,6 +145,7 @@ export default function SignUp() {
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: "blue",
+              background: "blue",
               color: "black",
               border: "1px solid",
               borderRadius: "8px",

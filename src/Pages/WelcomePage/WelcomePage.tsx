@@ -4,13 +4,25 @@ import { Box, Button, Heading, Text } from "theme-ui";
 export default function WelcomePage() {
   const navigate = useNavigate(); // Initialize useNavigate
 
+  const handleSignIn = () => {
+    navigate("/Sign-in");
+  };
+
   const handleSignUp = () => {
     navigate("/Sign-up2"); // Navigate to the Sign-up page
   };
 
   return (
     <>
-      <Box sx={{ fontFamily: "san", background: "#9fc5e8, #f2f2f2" }}>
+      <Box
+        sx={{
+          fontFamily: "san",
+          maxWidth: 400,
+          margin: "0 auto",
+          height: "100vh",
+          alignContent: "center",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -20,7 +32,7 @@ export default function WelcomePage() {
           }}
         >
           <img
-            src="/Logo/mortarboard.png"
+            src="/Logo/Education logo.png"
             alt="Graduation Hat"
             style={{
               width: "100px",
@@ -95,7 +107,7 @@ export default function WelcomePage() {
               backgroundColor: "white",
               color: "black",
               border: "1px solid",
-              borderRadius: "8px",
+              borderRadius: "10px",
               width: "100%",
               padding: "12px",
               fontSize: "16px",
@@ -103,6 +115,7 @@ export default function WelcomePage() {
               marginBottom: "10px",
               fontWeight: 600,
             }}
+            onClick={handleSignIn}
             type="submit"
           >
             SIGN IN

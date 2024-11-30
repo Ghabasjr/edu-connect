@@ -20,13 +20,18 @@ export default function SignUp2() {
   return (
     <>
       <Box
+        as="form"
         sx={{
           width: "100%",
-          maxWidth: "400px",
-          margin: "0 auto",
+          // margin: "0 auto",
           mt: "80px",
           gap: 30,
           fontWeight: 600,
+          maxWidth: 400,
+          margin: "auto auto",
+          alignContent: "center",
+          height: "100vh",
+          alignItems: "center",
         }}
       >
         <Box
