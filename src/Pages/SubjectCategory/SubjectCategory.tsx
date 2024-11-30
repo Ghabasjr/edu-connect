@@ -1,5 +1,5 @@
-import { Navigate, useNavigate } from "react-router-dom";
-import { Box, Button, Checkbox, Heading, Input, Text } from "theme-ui";
+import { useNavigate } from "react-router-dom";
+import { Box, Button, Checkbox, Heading, Text } from "theme-ui";
 
 export default function SubjectCategory() {
   const navigate = useNavigate();

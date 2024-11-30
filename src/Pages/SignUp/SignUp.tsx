@@ -19,7 +19,7 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
-    navigate("/email-verification");
+    navigate("/email-verification"); // After sign-up, navigate to email verification page
   };
 
   const formik = useFormik({
@@ -46,11 +46,11 @@ export default function SignUp() {
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        // Simulate a sign-up process (Replace this with your own logic)
+        // Simulate a sign-up process (Replace with actual logic if needed)
         console.log("User signed up:", values);
 
-        // After successful sign-up, navigate to the confirmation page
-        navigate("/email-verification"); // Navigates to the "confirm-email" page
+        // After successful sign-up, navigate to email verification page
+        navigate("/email-verification");
       } catch (error) {
         console.error(error);
       }
@@ -68,24 +68,24 @@ export default function SignUp() {
         alignContent: "center",
       }}
     >
-      <Heading sx={{ marginBottom: 20, textAlign: "center" }}>Sign Up</Heading>
+      <Heading
+        sx={{ marginBottom: 100, textAlign: "center", fontSize: "50px" }}
+      >
+        Sign Up
+      </Heading>
 
       <Flex sx={{ flexDirection: "column", gap: 3 }}>
-        <Label htmlFor="firstName">Name</Label>
-        <Input
-          id="firstName"
-          name="firstName"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.firstName}
-        />
         {formik.touched.firstName && formik.errors.firstName && (
           <Box sx={{ color: "red" }}>{formik.errors.firstName}</Box>
         )}
 
-        <Label htmlFor="email">Email</Label>
+        {formik.touched.lastName && formik.errors.lastName && (
+          <Box sx={{ color: "red" }}>{formik.errors.lastName}</Box>
+        )}
+
         <Input
+          sx={{ backgroundColor: "white", background: "white" }}
+          placeholder="Email"
           id="email"
           name="email"
           type="email"
@@ -97,8 +97,9 @@ export default function SignUp() {
           <Box sx={{ color: "red" }}>{formik.errors.email}</Box>
         )}
 
-        <Label htmlFor="password">Password</Label>
         <Input
+          sx={{ background: "white" }}
+          placeholder="password"
           id="password"
           name="password"
           type="password"
@@ -108,6 +109,10 @@ export default function SignUp() {
         />
         {formik.touched.password && formik.errors.password && (
           <Box sx={{ color: "red" }}>{formik.errors.password}</Box>
+        )}
+
+        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+          <Box sx={{ color: "red" }}>{formik.errors.confirmPassword}</Box>
         )}
 
         <Paragraph sx={{ textAlign: "right" }}>
@@ -157,7 +162,7 @@ export default function SignUp() {
               fontWeight: 600,
               marginTop: 20,
             }}
-            type="button" // Change to type="button" since we're handling click explicitly
+            type="button"
             onClick={handleSubmit} // Trigger form submission manually
           >
             Sign Up

@@ -1,4 +1,4 @@
-import { Box, Heading, Link, Paragraph, Text } from "theme-ui";
+import { Box, Heading, Link, Text } from "theme-ui";
 
 function EmailVerification() {
   return (
@@ -23,7 +23,7 @@ function EmailVerification() {
         >
           <img
             src="/Logo/Group.png"
-            style={{ width: "100px", height: "100px", background: "#9fc5e8" }}
+            sx={{ width: 100, height: 100, background: "#9fc5e8" }}
           />
         </Box>
         <Box
@@ -39,20 +39,20 @@ function EmailVerification() {
             <Heading>Confirm your Email address</Heading>
           </Box>
           <Box sx={{ mt: "30px" }}>
-            <Paragraph>We sent a confirmation Email to:</Paragraph>
+            <Text>We sent a confirmation Email to:</Text>
             {/* write a logic to call the user email address */}
             <Text sx={{ display: "block", fontWeight: "bold" }}>
               educonnect@gmail.com
             </Text>
           </Box>
           <Box sx={{ mt: "30px", display: "flex", textAlign: "center" }}>
-            <Paragraph>
+            <Text>
               Check your email and click on the confirmation link to continue
-            </Paragraph>
+            </Text>
           </Box>
           <Box sx={{ mt: "13rem" }}>
             <Text>
-              Didn't receive? <Link to="/resend-email">Resend email</Link>
+              Didn't receive? <Link href="/resend-email">Resend email</Link>
             </Text>
           </Box>
         </Box>

@@ -36,33 +36,18 @@ const SignIn: React.FC = () => {
       setErrorMessage(""); // Clear previous error message before submitting
 
       try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          values.email,
-          values.password
-        );
-        console.log("userCredential", userCredential);
-
-        const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
-
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          console.log("userData", userData);
-
-          if (userData.role === "admin") {
-            console.log("admin-dashboard");
-            navigate("/admin-dashboard");
-          } else {
-            console.log("users-dashboard");
-            navigate("/");
-          }
+        // Simulate API call or authentication logic
+        if (
+          values.email === "admin@example.com" &&
+          values.password === "admin"
+        ) {
+          navigate("/admin-dashboard");
         } else {
-          console.error("No user data found in Firebase store");
+          navigate("/");
         }
-      } catch (error: unknown) {
-        if (typeof error === "object" || error !== null || "code" in error) {
-          // Set the error message
-        }
+      } catch (error) {
+        console.error("Error during sign-in", error);
+        setErrorMessage("Invalid credentials, please try again.");
       }
 
       setLoading(false);
@@ -71,7 +56,7 @@ const SignIn: React.FC = () => {
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      setErrorMessage(null); // Set the error message
+      setErrorMessage(null); // Clear the error message after 5 seconds
     }, 5000);
 
     return () => clearTimeout(timerId);
@@ -81,21 +66,20 @@ const SignIn: React.FC = () => {
     console.log("Google sign-up triggered");
     // Add your Google authentication logic here
   };
+
   const handleLogIn = () => {
     navigate("/subject-category");
   };
 
   return (
-    // @ts-ignore
     <Box
       as="form"
       onSubmit={formik.handleSubmit}
       sx={{
         maxWidth: 400,
-        margin: "auto auto",
-        alignContent: "center",
-        height: "100vh",
+        margin: "auto",
         alignItems: "center",
+        height: "100vh",
       }}
     >
       {/* Display error message if it exists */}
@@ -114,21 +98,20 @@ const SignIn: React.FC = () => {
             backgroundColor: "red",
             color: "white",
             transition: "0.2s ease-in",
-            borderLeftColor: "none",
           }}
         >
           {errorMessage}
         </Message>
       )}
-      <Box
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-      >
-        <img src="/Logo/Education logo.png" />
+
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <img src="/Logo/Education logo.png" alt="Education Logo" />
       </Box>
 
       <Heading sx={{ marginBottom: 20, textAlign: "center" }}>
         EDUCONNECT
       </Heading>
+
       <Box sx={{ display: "flex", justifyContent: "center", mb: 10 }}>
         <Text>Your Academic Home</Text>
       </Box>
@@ -140,7 +123,6 @@ const SignIn: React.FC = () => {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "white",
-          background: "white",
           color: "black",
           border: "1px solid",
           borderRadius: "8px",
@@ -160,6 +142,7 @@ const SignIn: React.FC = () => {
         />
         Sign up with Google
       </Button>
+
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Text>OR</Text>
       </Box>
@@ -198,7 +181,7 @@ const SignIn: React.FC = () => {
         <Paragraph sx={{ textAlign: "right" }}>
           Don't have an Account?{" "}
           <Link
-            to={"/sign-up"}
+            to="/sign-up"
             sx={{
               color: "blue",
               cursor: "pointer",
@@ -230,7 +213,7 @@ const SignIn: React.FC = () => {
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: "white",
-              background: "Blue",
+              background: "blue",
               color: "black",
               border: "1px solid",
               borderRadius: "8px",
@@ -248,27 +231,20 @@ const SignIn: React.FC = () => {
           </Button>
         )}
 
-        <Paragraph
-          sx={{
-            // justifyContent: "center",
-            // alignItems: "center",
-            // display: "flex",
-            textAlign: "center",
-          }}
-        >
+        <Paragraph sx={{ textAlign: "center" }}>
           By continuing you agree with the <Link to="">Terms of Service</Link>{" "}
           and <Link to="">Privacy Policy</Link>
         </Paragraph>
-        <Box>
-          <Text
-            sx={{
-              textAlign: "center",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Link to="/forgot-password">Forget Your password</Link>
+
+        <Box
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            display: "flex",
+          }}
+        >
+          <Text sx={{ textAlign: "center" }}>
+            <Link to="/forgot-password">Forgot Your Password?</Link>
           </Text>
         </Box>
       </Flex>

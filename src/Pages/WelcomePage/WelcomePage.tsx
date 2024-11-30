@@ -16,11 +16,13 @@ export default function WelcomePage() {
     <>
       <Box
         sx={{
-          fontFamily: "san",
+          fontFamily: "sans-serif",
           maxWidth: 400,
-          margin: "0 auto",
-          height: "100vh",
+          margin: "auto auto",
           alignContent: "center",
+          height: "100vh",
+          alignItems: "center",
+          padding: "10px",
         }}
       >
         <Box
@@ -107,7 +109,7 @@ export default function WelcomePage() {
               backgroundColor: "white",
               color: "black",
               border: "1px solid",
-              borderRadius: "10px",
+              borderRadius: "8px",
               width: "100%",
               padding: "12px",
               fontSize: "16px",
@@ -142,28 +144,29 @@ export default function WelcomePage() {
             SIGN UP
           </Button>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          mt: 20,
-        }}
-      >
-        <Box>
-          <img
-            src="/Logo/formula.png"
-            style={{ width: "50px", height: "50px" }}
-          />
-        </Box>
-        <Box />
-        <Box>
-          <img
-            src="/Logo/science.png"
-            style={{ width: "50px", height: "50px" }}
-          />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            mt: 20,
+            padding: "20px",
+          }}
+        >
+          <Box>
+            <img
+              src="/Logo/formula.png"
+              style={{ width: "50px", height: "50px" }}
+            />
+          </Box>
+          <Box />
+          <Box>
+            <img
+              src="/Logo/science.png"
+              style={{ width: "50px", height: "50px" }}
+            />
+          </Box>
         </Box>
       </Box>
     </>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Heading, Button, Text, Paragraph } from "theme-ui";
 
