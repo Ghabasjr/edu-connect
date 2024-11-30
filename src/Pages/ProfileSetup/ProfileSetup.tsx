@@ -18,6 +18,10 @@ function ProfileSetup() {
     paddingY: 1,
     width: "100%",
   };
+  const imgStyles = {
+    background: "white",
+    backgroundColor: "white",
+  };
 
   return (
     <>
@@ -40,7 +44,19 @@ function ProfileSetup() {
         </Box>
 
         <Box sx={{ display: "flex", justifyContent: "center", mt: "30px" }}>
-          <img src="/Logo/Glyph_undefined.png" alt="Profile Setup Icon" />
+          <Button
+            sx={{
+              backgroundColor: "white",
+              borderRadius: "50%",
+              background: "white",
+            }}
+          >
+            <img
+              src="/Logo/camera.png"
+              alt="Profile Setup Icon"
+              sx={imgStyles}
+            />
+          </Button>
         </Box>
 
         <Box sx={{ gap: 20, mt: 4 }}>

@@ -1,13 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
-  Message,
   Heading,
   Flex,
-  Label,
   Input,
   Paragraph,
   Button,
@@ -39,9 +37,9 @@ export default function SignUp() {
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
-        .required("Confirm password is required"),
+      // confirmPassword: Yup.string(),
+      // .oneOf([Yup.ref("password"), null], "Passwords must match")
+      // .required("Confirm password is required"),
     }),
     onSubmit: async (values) => {
       setLoading(true);
@@ -119,7 +117,7 @@ export default function SignUp() {
           Already have an account?{" "}
           <Link
             to="/sign-in"
-            sx={{
+            style={{
               color: "blue",
               cursor: "pointer",
               fontWeight: "600",

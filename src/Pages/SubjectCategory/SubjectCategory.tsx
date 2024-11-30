@@ -61,7 +61,7 @@ export default function SubjectCategory() {
             "Computer Science",
           ].map((subject) => (
             <label
-              sx={{
+              style={{
                 display: "flex",
                 alignItems: "center",
                 cursor: "pointer",

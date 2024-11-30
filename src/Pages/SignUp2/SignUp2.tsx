@@ -116,7 +116,10 @@ export default function SignUp2() {
         <Box sx={{ textAlign: "center", marginTop: "20px" }}>
           <Paragraph>
             Already have an account?{" "}
-            <Link to="/sign-in" sx={{ color: "#4285F4", fontWeight: "bold" }}>
+            <Link
+              to="/sign-in"
+              style={{ color: "#4285F4", fontWeight: "bold" }}
+            >
               Log in
             </Link>
           </Paragraph>
