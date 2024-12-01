@@ -11,14 +11,11 @@ import {
   Button,
   Spinner,
 } from "theme-ui";
+import { registerUser } from "../utils/apiService"; // Import the service
 
 export default function SignUp() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-  const handleSubmit = () => {
-    navigate("/email-verification"); // After sign-up, navigate to email verification page
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -26,7 +23,6 @@ export default function SignUp() {
       lastName: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("First name is required"),
@@ -37,28 +33,32 @@ export default function SignUp() {
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
-      // confirmPassword: Yup.string(),
-      // .oneOf([Yup.ref("password"), null], "Passwords must match")
-      // .required("Confirm password is required"),
     }),
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        // Simulate a sign-up process (Replace with actual logic if needed)
-        console.log("User signed up:", values);
+        const data = await registerUser(values); // Call the centralized API function
+        console.log("Registration successful:", data);
 
-        // After successful sign-up, navigate to email verification page
+        // Save token if needed for subsequent API calls
+        if (data.token) {
+          localStorage.setItem("authToken", data.token);
+        }
+
+        // Navigate to email verification page
         navigate("/email-verification");
       } catch (error) {
-        console.error(error);
+        alert(error.message || "Registration failed. Please try again.");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     },
   });
 
   return (
     <Box
       as="form"
+      onSubmit={formik.handleSubmit}
       sx={{
         maxWidth: 400,
         margin: "0 auto",
@@ -74,16 +74,34 @@ export default function SignUp() {
       </Heading>
 
       <Flex sx={{ flexDirection: "column", gap: 3 }}>
+        <Input
+          sx={{ backgroundColor: "white" }}
+          placeholder="First Name"
+          id="firstName"
+          name="firstName"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.firstName}
+        />
         {formik.touched.firstName && formik.errors.firstName && (
           <Box sx={{ color: "red" }}>{formik.errors.firstName}</Box>
         )}
 
+        <Input
+          sx={{ backgroundColor: "white" }}
+          placeholder="Last Name"
+          id="lastName"
+          name="lastName"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.lastName}
+        />
         {formik.touched.lastName && formik.errors.lastName && (
           <Box sx={{ color: "red" }}>{formik.errors.lastName}</Box>
         )}
 
         <Input
-          sx={{ backgroundColor: "white", background: "white" }}
+          sx={{ backgroundColor: "white" }}
           placeholder="Email"
           id="email"
           name="email"
@@ -97,8 +115,8 @@ export default function SignUp() {
         )}
 
         <Input
-          sx={{ background: "white" }}
-          placeholder="password"
+          sx={{ backgroundColor: "white" }}
+          placeholder="Password"
           id="password"
           name="password"
           type="password"
@@ -108,10 +126,6 @@ export default function SignUp() {
         />
         {formik.touched.password && formik.errors.password && (
           <Box sx={{ color: "red" }}>{formik.errors.password}</Box>
-        )}
-
-        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-          <Box sx={{ color: "red" }}>{formik.errors.confirmPassword}</Box>
         )}
 
         <Paragraph sx={{ textAlign: "right" }}>
@@ -132,11 +146,11 @@ export default function SignUp() {
         {loading ? (
           <Button
             sx={{
+              marginTop: 20,
               backgroundColor: "#192A41",
               borderRadius: 50,
               padding: 20,
               cursor: "pointer",
-              marginTop: 20,
             }}
             type="button"
           >
@@ -145,6 +159,7 @@ export default function SignUp() {
         ) : (
           <Button
             sx={{
+              marginTop: 20,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -159,10 +174,8 @@ export default function SignUp() {
               cursor: "pointer",
               marginBottom: "10px",
               fontWeight: 600,
-              marginTop: 20,
             }}
-            type="button"
-            onClick={handleSubmit} // Trigger form submission manually
+            type="submit" // Automatically triggers formik.handleSubmit
           >
             Sign Up
           </Button>
