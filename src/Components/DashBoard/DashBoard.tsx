@@ -98,7 +98,7 @@ export default function DashBoard() {
           </Box>
         </Box>
         {/* Horizontal Line */}
-        <HorizontalLine sx={{ width: "100%", maxWidth: "500px", mt: "20px" }} />
+
         <Box>
           <Box>
             <img src="/Logo/Ellipse 2 (1).png" />
@@ -144,7 +144,7 @@ export default function DashBoard() {
                 <Text>Angel Nancy</Text>
                 <Paragraph>Nov 24</Paragraph>
               </Box>
-              <Paragraph>History</Paragraph>
+              <Paragraph>Mathematics</Paragraph>
             </Box>
           </Box>
           <Box>
@@ -182,7 +182,7 @@ export default function DashBoard() {
                 <Text>Angel Nancy</Text>
                 <Paragraph>Nov 24</Paragraph>
               </Box>
-              <Paragraph>History</Paragraph>
+              <Paragraph>Computer Studies</Paragraph>
             </Box>
           </Box>
           <Box>
@@ -211,7 +211,6 @@ export default function DashBoard() {
             <Paragraph>...</Paragraph>
           </Box>
         </Box>
-        <HorizontalLine />
       </Box>
     </>
   );

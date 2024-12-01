@@ -66,8 +66,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
-* {
-  background-color: linear-gradient(
+body {
+  background: linear-gradient(
     171.69deg,
     #9fc5e8 28.85%,
     #f2f2f2 80.33%

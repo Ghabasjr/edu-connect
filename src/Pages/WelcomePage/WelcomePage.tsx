@@ -16,7 +16,7 @@ export default function WelcomePage() {
     <>
       <Box
         sx={{
-          fontFamily: "sans-serif",
+          // fontFamily: "sans-serif",
           maxWidth: "100%",
           margin: "0 auto",
           height: "100vh",

@@ -75,6 +75,7 @@ const SignIn: React.FC = () => {
         alignItems: "center",
         height: "100vh",
         background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
+        padding: "20px, 30px, 40px",
       }}
     >
       {/* Display error message if it exists */}
@@ -209,7 +210,7 @@ const SignIn: React.FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "white",
+                // backgroundColor: "white",
                 background: "blue",
                 color: "black",
                 border: "1px solid",
