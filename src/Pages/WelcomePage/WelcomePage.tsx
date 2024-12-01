@@ -39,7 +39,7 @@ export default function WelcomePage() {
           }}
         >
           <img
-            src="/Logo/Education logo.png"
+            src="/public/Logo/Education logo.png"
             alt="Graduation Hat"
             style={{
               width: "80px",
@@ -60,7 +60,7 @@ export default function WelcomePage() {
           >
             WELCOME
             <img
-              src="/Logo/gross-striped-short-pencil-symbol.png"
+              src="/public/Logo/gross-striped-short-pencil-symbol.png"
               alt="Pencil Icon"
               style={{
                 width: "20px",
@@ -78,7 +78,7 @@ export default function WelcomePage() {
               }}
             >
               <img
-                src="/Logo/mortarboard.png"
+                src="/public/Logo/mortarboard.png"
                 style={{
                   width: "20px",
                   height: "18px",
@@ -157,12 +157,12 @@ export default function WelcomePage() {
           }}
         >
           <img
-            src="/Logo/formula.png"
+            src="/public/Logo/formula.png"
             alt="Formula Icon"
             style={{ width: "40px", height: "40px" }}
           />
           <img
-            src="/Logo/science.png"
+            src="/public/Logo/science.png"
             alt="Science Icon"
             style={{ width: "40px", height: "40px" }}
           />

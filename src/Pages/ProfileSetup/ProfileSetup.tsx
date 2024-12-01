@@ -53,7 +53,7 @@ function ProfileSetup() {
             }}
           >
             <img
-              src="/Logo/camera.png"
+              src="/public/Logo/camera.png"
               alt="Profile Setup Icon"
               style={imgStyles}
             />
@@ -63,7 +63,7 @@ function ProfileSetup() {
         <Box sx={{ gap: 20, mt: 4 }}>
           <Text>
             Username
-            <img src="/Logo/_.png" alt="Underline Icon" />
+            <img src="/public/Logo/_.png" alt="Underline Icon" />
           </Text>
           <Box sx={{ mt: 3 }}>
             <Input sx={inputStyles} placeholder="Enter your username" />
@@ -73,7 +73,7 @@ function ProfileSetup() {
         <Box sx={{ gap: 20, mt: 4 }}>
           <Text>
             School
-            <img src="/Logo/_.png" alt="Underline Icon" />
+            <img src="/public/Logo/_.png" alt="Underline Icon" />
           </Text>
           <Box sx={{ mt: 3 }}>
             <Input sx={inputStyles} placeholder="Enter your School" />
@@ -83,7 +83,7 @@ function ProfileSetup() {
         <Box sx={{ gap: 20, mt: 4 }}>
           <Text>
             Grade
-            <img src="/Logo/_.png" alt="Underline Icon" />
+            <img src="/public/Logo/_.png" alt="Underline Icon" />
           </Text>
           <Box sx={{ mt: 3 }}>
             <Input sx={inputStyles} placeholder="Enter your Grade" />
@@ -93,7 +93,7 @@ function ProfileSetup() {
         <Box sx={{ gap: 20, mt: 4 }}>
           <Text>
             Date of Birth
-            <img src="/Logo/_.png" alt="Underline Icon" />
+            <img src="/public/Logo/_.png" alt="Underline Icon" />
           </Text>
           <Box sx={{ mt: 3 }}>
             <Input sx={inputStyles} placeholder="Enter your Date of Birth" />

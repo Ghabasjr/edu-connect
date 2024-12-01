@@ -23,7 +23,7 @@ function EmailVerification() {
           }}
         >
           <img
-            src="/Logo/Group.png"
+            src="/public/Logo/Group.png"
             style={{ width: 100, height: 100, background: "#9fc5e8" }}
           />
         </Box>
