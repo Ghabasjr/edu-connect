@@ -43,7 +43,7 @@ export default function SignUp2() {
           }}
         >
           <img
-            src="/public/Logo/mortarboard.png"
+            src="/mortarboard.png"
             alt="Graduation Hat"
             style={{
               width: "100px",
@@ -85,7 +85,7 @@ export default function SignUp2() {
           onClick={handleGoogleSignUp}
         >
           <img
-            src="/public/Logo/search.png" // Google logo
+            src="/search.png" // Google logo
             alt="Google logo"
             style={{ width: "24px", height: "24px", marginRight: "10px" }}
           />

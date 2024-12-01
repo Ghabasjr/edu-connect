@@ -101,7 +101,7 @@ const SignIn: React.FC = () => {
       )}
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <img src="/public/Logo/Education logo.png" alt="Education Logo" />
+        <img src="/Education logo.png" alt="Education Logo" />
       </Box>
 
       <Heading sx={{ marginBottom: 20, textAlign: "center" }}>
@@ -132,7 +132,7 @@ const SignIn: React.FC = () => {
         onClick={handleGoogleSignUp}
       >
         <img
-          src="/public/Logo/search.png" // Google logo
+          src="/search.png" // Google logo
           alt="Google logo"
           style={{ width: "24px", height: "24px", marginRight: "10px" }}
         />

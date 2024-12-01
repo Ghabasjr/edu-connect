@@ -2,21 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, Heading, Text } from "theme-ui";
 
 export default function WelcomePage() {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSignIn = () => {
     navigate("/Sign-in");
   };
 
   const handleSignUp = () => {
-    navigate("/Sign-up2"); // Navigate to the Sign-up page
+    navigate("/Sign-up2");
   };
 
   return (
     <>
       <Box
         sx={{
-          // fontFamily: "sans-serif",
           maxWidth: "100%",
           margin: "0 auto",
           height: "100vh",
@@ -39,7 +38,7 @@ export default function WelcomePage() {
           }}
         >
           <img
-            src="/public/Logo/Education logo.png"
+            src="/Education logo.png" // Path to public folder directly
             alt="Graduation Hat"
             style={{
               width: "80px",
@@ -60,7 +59,7 @@ export default function WelcomePage() {
           >
             WELCOME
             <img
-              src="/public/Logo/gross-striped-short-pencil-symbol.png"
+              src="/gross-striped-short-pencil-symbol.png" // Path to public folder directly
               alt="Pencil Icon"
               style={{
                 width: "20px",
@@ -78,12 +77,13 @@ export default function WelcomePage() {
               }}
             >
               <img
-                src="/public/Logo/mortarboard.png"
+                src="/mortarboard.png" // Path to public folder directly
                 style={{
                   width: "20px",
                   height: "18px",
                   marginRight: "8px",
                 }}
+                alt="Mortarboard Icon"
               />
             </Box>
             EDUCONNECT
@@ -157,12 +157,12 @@ export default function WelcomePage() {
           }}
         >
           <img
-            src="/public/Logo/formula.png"
+            src="/formula.png" // Path to public folder directly
             alt="Formula Icon"
             style={{ width: "40px", height: "40px" }}
           />
           <img
-            src="/public/Logo/science.png"
+            src="/science.png" // Path to public folder directly
             alt="Science Icon"
             style={{ width: "40px", height: "40px" }}
           />

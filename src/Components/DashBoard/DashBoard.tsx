@@ -26,14 +26,14 @@ export default function DashBoard() {
         }}
       >
         <img
-          src="/public/Logo/Education logo.png"
+          src="/Education logo.png"
           alt="Education Logo"
           style={{ width: "45px", height: "45px" }}
         />
         <Box sx={{ display: "flex", gap: "20px" }}>
-          <img src="/public/Logo/add.png" alt="Add Icon" />
-          <img src="/public/Logo/search (2).png" alt="Search Icon" />
-          <img src="/public/Logo/vectoere.png" alt="Menu Icon" />
+          <img src="/add.png" alt="Add Icon" />
+          <img src="/search (2).png" alt="Search Icon" />
+          <img src="/vectoere.png" alt="Menu Icon" />
         </Box>
       </Box>
 
@@ -48,10 +48,10 @@ export default function DashBoard() {
           mb: "20px",
         }}
       >
-        <img src="/public/Logo/home.png" alt="Home Icon" />
-        <img src="/public/Logo/home3.png" alt="Explore Icon" />
-        <img src="/public/Logo/icon4.png" alt="Bookmark Icon" />
-        <img src="/public/Logo/notification.png" alt="Notification Icon" />
+        <img src="/home.png" alt="Home Icon" />
+        <img src="/home3.png" alt="Explore Icon" />
+        <img src="/icon4.png" alt="Bookmark Icon" />
+        <img src="/notification.png" alt="Notification Icon" />
       </Box>
 
       {/* Input Section */}
@@ -66,7 +66,7 @@ export default function DashBoard() {
         }}
       >
         <img
-          src="/Logo/Ellipse 1.png"
+          src="/Ellipse 1.png"
           alt="Profile Icon"
           style={{
             width: "45px",
@@ -93,7 +93,7 @@ export default function DashBoard() {
           sx={{
             width: "100%",
             maxWidth: "500px",
-            backgroundColor: "white",
+            // backgroundColor: "white",
             borderRadius: "10px",
             boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
             padding: "15px",
@@ -111,7 +111,7 @@ export default function DashBoard() {
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <img
-                src="/public/Logo/Ellipse 2 (1).png"
+                src="/Ellipse 2 (1).png"
                 alt="User Avatar"
                 style={{ width: "45px", height: "45px", borderRadius: "50%" }}
               />
@@ -157,15 +157,19 @@ export default function DashBoard() {
                 gap: "5px",
                 borderRadius: "20px",
                 padding: "5px 10px",
-                backgroundColor: "#f0f0f0",
+                backgroundColor: "background",
                 color: "black",
                 fontSize: "14px",
               }}
             >
               <img
-                src="/public/Logo/upvote.png"
+                src="/upvote.png"
                 alt="Upvote Icon"
-                style={{ width: "16px" }}
+                style={{
+                  width: "16px, 10px, 16px",
+                  height: "16px",
+                  background: "Background",
+                }}
               />
               Upvote. 2.1k
             </Button>
@@ -182,7 +186,7 @@ export default function DashBoard() {
               }}
             >
               <img
-                src="/public/Logo/answers.png"
+                src="/answers.png"
                 alt="Answer Icon"
                 style={{ width: "16px" }}
               />
