@@ -11,7 +11,7 @@ import {
   Button,
   Spinner,
 } from "theme-ui";
-import { registerUser } from "../utils/apiService"; // Import the service
+import { registerUser } from "../utils/apiService";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -19,33 +19,33 @@ export default function SignUp() {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      username: "",
       email: "",
       password: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First name is required"),
-      lastName: Yup.string().required("Last name is required"),
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
+      username: Yup.string()
+        .notOneOf([Yup.ref("email")], "Username must be different from email")
+        .required("Username is required"),
       password: Yup.string()
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
+
     onSubmit: async (values) => {
       setLoading(true);
       try {
-        const data = await registerUser(values); // Call the centralized API function
+        const data = await registerUser(
+          values.username,
+          values.email,
+          values.password
+        ); // Updated API function
         console.log("Registration successful:", data);
 
-        // Save token if needed for subsequent API calls
-        if (data.token) {
-          localStorage.setItem("authToken", data.token);
-        }
-
-        // Navigate to email verification page
+        // Navigate to email verification page if registration succeeds
         navigate("/email-verification");
       } catch (error) {
         alert(error.message || "Registration failed. Please try again.");
@@ -64,7 +64,7 @@ export default function SignUp() {
         margin: "0 auto",
         height: "100vh",
         alignContent: "center",
-        background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
+        background: "linear-gradient(to bottom, #9fc5e8, #f2f2f2)",
       }}
     >
       <Heading
@@ -76,28 +76,16 @@ export default function SignUp() {
       <Flex sx={{ flexDirection: "column", gap: 3 }}>
         <Input
           sx={{ backgroundColor: "white" }}
-          placeholder="First Name"
-          id="firstName"
-          name="firstName"
+          placeholder="Username"
+          id="username"
+          name="username"
+          type="text"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.firstName}
+          value={formik.values.username} // Correctly bound to `formik.values.username`
         />
-        {formik.touched.firstName && formik.errors.firstName && (
-          <Box sx={{ color: "red" }}>{formik.errors.firstName}</Box>
-        )}
-
-        <Input
-          sx={{ backgroundColor: "white" }}
-          placeholder="Last Name"
-          id="lastName"
-          name="lastName"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lastName}
-        />
-        {formik.touched.lastName && formik.errors.lastName && (
-          <Box sx={{ color: "red" }}>{formik.errors.lastName}</Box>
+        {formik.touched.username && formik.errors.username && (
+          <Box sx={{ color: "red" }}>{formik.errors.username}</Box>
         )}
 
         <Input
@@ -164,7 +152,6 @@ export default function SignUp() {
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: "blue",
-              background: "blue",
               color: "black",
               border: "1px solid",
               borderRadius: "8px",
@@ -175,7 +162,7 @@ export default function SignUp() {
               marginBottom: "10px",
               fontWeight: 600,
             }}
-            type="submit" // Automatically triggers formik.handleSubmit
+            type="submit"
           >
             Sign Up
           </Button>
