@@ -6,7 +6,6 @@ import { signInWithGoogle } from "../utils/apiService";
 
 export default function SignUp2() {
   const navigate = useNavigate();
-
   const handleGoogleSignUp = async () => {
     try {
       // Initialize Google API client (ensure this is done somewhere globally)
@@ -28,8 +27,15 @@ export default function SignUp2() {
 
       // Navigate to dashboard or show a success message
       navigate("/dashboard");
-    } catch (error) {
-      console.error("Error during Google sign-up:", error.message || error);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Error during Google sign-up:", error.message);
+      } else {
+        console.error(
+          "An unknown error occurred during Google sign-up:",
+          error
+        );
+      }
       alert("Google sign-up failed. Please try again.");
     }
   };

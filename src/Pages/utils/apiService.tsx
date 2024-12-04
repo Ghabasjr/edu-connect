@@ -29,14 +29,27 @@ const apiCall = async (
       body: body ? JSON.stringify(body) : null,
     });
 
+    if (!(response instanceof Response)) {
+      throw new Error("Invalid response from API");
+    }
+
     const data = await response.json();
+
     if (!response.ok) {
       throw new Error(data.message || "An error occurred");
     }
+
     return data;
-  } catch (error) {
-    console.error(`Error in API call to ${endpoint}:`, error.message || error);
-    throw error;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(`Error in API call to ${endpoint}:`, error.message);
+    } else {
+      console.error(
+        `An unknown error occurred in API call to ${endpoint}:`,
+        error
+      );
+    }
+    throw error; // Re-throw error to propagate it
   }
 };
 
@@ -50,7 +63,8 @@ export const registerUser = async (
 ) => {
   return apiCall("/register", "POST", { username, email, password });
 };
-export const signInWithGoogle = async (idToken: any) => {
+
+export const signInWithGoogle = async (idToken: unknown) => {
   return apiCall("/auth", "POST", { idToken });
 };
 
