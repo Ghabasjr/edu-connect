@@ -17,7 +17,12 @@ import { loginUser, signInWithGoogle } from "../utils/apiService";
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  // const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // const togglePasswordVisibility = () => {
+  //   setIsPasswordVisible(!isPasswordVisible);
+  // };
 
   // Formik for form handling and validation
   const formik = useFormik({
@@ -200,6 +205,9 @@ const SignIn: React.FC = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               sx={{ bg: "white" }}
+              // isPasswordVisible={isPasswordVisible}
+              // togglePasswordVisibility={togglePasswordVisibility}
+              // secureTextEntry
             />
             {formik.touched.password && formik.errors.password && (
               <Text sx={{ color: "red", fontSize: 12, mt: 1 }}>
