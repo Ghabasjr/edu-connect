@@ -16,7 +16,6 @@ import { registerUser } from "../utils/apiService";
 export default function SignUp() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  navigate("/email-verification");
 
   const formik = useFormik({
     initialValues: {
@@ -58,7 +57,8 @@ export default function SignUp() {
         console.log("Registration successful:", data);
 
         // Redirect to email verification page
-      } catch (error: any) {
+        navigate("/email-verification");
+      } catch (error: unknown) {
         alert(error.message || "Registration failed. Please try again.");
       } finally {
         setLoading(false);
@@ -67,9 +67,7 @@ export default function SignUp() {
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit} // Ensure Formik's submit handler is called
-    >
+    <form onSubmit={formik.handleSubmit}>
       <Box
         sx={{
           maxWidth: 400,
