@@ -67,95 +67,100 @@ export default function SignUp() {
   });
 
   return (
-    <Box
-      as="form"
+    <form
       onSubmit={formik.handleSubmit} // Ensure Formik's submit handler is called
-      sx={{
-        maxWidth: 400,
-        margin: "0 auto",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: 3,
-        background: "linear-gradient(to bottom, #9fc5e8, #f2f2f2)",
-        borderRadius: "8px",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-      }}
     >
-      <Heading sx={{ textAlign: "center", fontSize: 40, marginBottom: 4 }}>
-        Sign Up
-      </Heading>
+      <Box
+        sx={{
+          maxWidth: 400,
+          margin: "0 auto",
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: 3,
+          background: "linear-gradient(to bottom, #9fc5e8, #f2f2f2)",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Heading sx={{ textAlign: "center", fontSize: 40, marginBottom: 4 }}>
+          Sign Up
+        </Heading>
 
-      <Flex sx={{ flexDirection: "column", gap: 3 }}>
-        <Input
-          id="username"
-          name="username"
-          placeholder="Username"
-          value={formik.values.username}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ backgroundColor: "white" }}
-        />
-        {formik.touched.username && formik.errors.username && (
-          <Box sx={{ color: "red", fontSize: 12 }}>
-            {formik.errors.username}
-          </Box>
-        )}
+        <Flex sx={{ flexDirection: "column", gap: 3 }}>
+          <Input
+            id="username"
+            name="username"
+            placeholder="Username"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            sx={{ backgroundColor: "white" }}
+          />
+          {formik.touched.username && formik.errors.username && (
+            <Box sx={{ color: "red", fontSize: 12 }}>
+              {formik.errors.username}
+            </Box>
+          )}
 
-        <Input
-          id="email"
-          name="email"
-          placeholder="Email"
-          type="email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ backgroundColor: "white" }}
-        />
-        {formik.touched.email && formik.errors.email && (
-          <Box sx={{ color: "red", fontSize: 12 }}>{formik.errors.email}</Box>
-        )}
+          <Input
+            id="email"
+            name="email"
+            placeholder="Email"
+            type="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            sx={{ backgroundColor: "white" }}
+          />
+          {formik.touched.email && formik.errors.email && (
+            <Box sx={{ color: "red", fontSize: 12 }}>{formik.errors.email}</Box>
+          )}
 
-        <Input
-          id="password"
-          name="password"
-          placeholder="Password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          sx={{ backgroundColor: "white" }}
-        />
-        {formik.touched.password && formik.errors.password && (
-          <Box sx={{ color: "red", fontSize: 12 }}>
-            {formik.errors.password}
-          </Box>
-        )}
+          <Input
+            id="password"
+            name="password"
+            placeholder="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            sx={{ backgroundColor: "white" }}
+          />
+          {formik.touched.password && formik.errors.password && (
+            <Box sx={{ color: "red", fontSize: 12 }}>
+              {formik.errors.password}
+            </Box>
+          )}
 
-        <Paragraph sx={{ textAlign: "right", fontSize: 14 }}>
-          Already have an account?{" "}
-          <Link to="/sign-in" style={{ color: "blue", textDecoration: "none" }}>
-            Log in
-          </Link>
-        </Paragraph>
+          <Paragraph sx={{ textAlign: "right", fontSize: 14 }}>
+            Already have an account?{" "}
+            <Link
+              to="/sign-in"
+              style={{ color: "blue", textDecoration: "none" }}
+            >
+              Log in
+            </Link>
+          </Paragraph>
 
-        <Button
-          type="submit" // Ensure the button triggers form submission
-          disabled={loading}
-          sx={{
-            mt: 3,
-            backgroundColor: loading ? "#192A41" : "blue",
-            color: "white",
-            fontWeight: "bold",
-            padding: "12px",
-            borderRadius: "8px",
-            cursor: loading ? "not-allowed" : "pointer",
-          }}
-        >
-          {loading ? <Spinner /> : "Sign Up"}
-        </Button>
-      </Flex>
-    </Box>
+          <Button
+            type="submit" // Ensure the button triggers form submission
+            disabled={loading}
+            sx={{
+              mt: 3,
+              backgroundColor: loading ? "#192A41" : "blue",
+              color: "white",
+              fontWeight: "bold",
+              padding: "12px",
+              borderRadius: "8px",
+              cursor: loading ? "not-allowed" : "pointer",
+            }}
+          >
+            {loading ? <Spinner /> : "Sign Up"}
+          </Button>
+        </Flex>
+      </Box>
+    </form>
   );
 }

@@ -83,12 +83,12 @@ export const registerUser = async (
       throw new Error(response.data.message || "Registration failed");
     }
   } catch (error) {
-    if (error.response) {
+    if (error instanceof Error) {
       // Server error
-      throw new Error(error.response.data.message || "Registration error");
+      console.error("Error:", error.message || "Registration error");
     } else {
       // Network or unexpected error
-      throw new Error("An unexpected error occurred. Please try again.");
+      console.error("An unexpected error occurred. Please try again.");
     }
   }
 };
