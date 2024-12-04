@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Checkbox, Heading, Text } from "theme-ui";
+import { Box, Button, Heading, Radio, Text } from "theme-ui";
 
 export default function SubjectCategory() {
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ export default function SubjectCategory() {
                   borderRadius: "10px",
                 }}
               >
-                <Checkbox
+                <Radio
                   type="checkbox"
                   name="subject"
                   sx={{

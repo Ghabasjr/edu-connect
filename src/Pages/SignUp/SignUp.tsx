@@ -28,10 +28,19 @@ export default function SignUp() {
         .email("Invalid email address")
         .required("Email is required"),
       username: Yup.string()
-        .notOneOf([Yup.ref("email")], "Username must be different from email")
+        .min(3, "Username must be at least 3 characters")
+        .max(20, "Username must not exceed 20 characters")
+        .notOneOf([Yup.ref("email")], "Username must differ from email")
         .required("Username is required"),
       password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
+        .min(8, "Password must be at least 8 characters")
+        .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+        .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+        .matches(/\d/, "Password must contain at least one number")
+        .matches(
+          /[!@#$%^&*]/,
+          "Password must contain at least one special character"
+        )
         .required("Password is required"),
     }),
 
@@ -42,12 +51,13 @@ export default function SignUp() {
           values.username,
           values.email,
           values.password
-        ); // Updated API function
+        );
         console.log("Registration successful:", data);
 
-        // Navigate to email verification page if registration succeeds
+        // Redirect to email verification page
         navigate("/email-verification");
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
         alert(error.message || "Registration failed. Please try again.");
       } finally {
         setLoading(false);
@@ -58,115 +68,91 @@ export default function SignUp() {
   return (
     <Box
       as="form"
-      onSubmit={formik.handleSubmit}
       sx={{
         maxWidth: 400,
         margin: "0 auto",
         height: "100vh",
-        alignContent: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: 3,
         background: "linear-gradient(to bottom, #9fc5e8, #f2f2f2)",
+        borderRadius: "8px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Heading
-        sx={{ marginBottom: 100, textAlign: "center", fontSize: "50px" }}
-      >
+      <Heading sx={{ textAlign: "center", fontSize: 40, marginBottom: 4 }}>
         Sign Up
       </Heading>
 
       <Flex sx={{ flexDirection: "column", gap: 3 }}>
         <Input
-          sx={{ backgroundColor: "white" }}
-          placeholder="Username"
           id="username"
           name="username"
-          type="text"
+          placeholder="Username"
+          value={formik.values.username}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.username} // Correctly bound to `formik.values.username`
+          sx={{ backgroundColor: "white" }}
         />
         {formik.touched.username && formik.errors.username && (
-          <Box sx={{ color: "red" }}>{formik.errors.username}</Box>
+          <Box sx={{ color: "red", fontSize: 12 }}>
+            {formik.errors.username}
+          </Box>
         )}
 
         <Input
-          sx={{ backgroundColor: "white" }}
-          placeholder="Email"
           id="email"
           name="email"
+          placeholder="Email"
           type="email"
+          value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.email}
+          sx={{ backgroundColor: "white" }}
         />
         {formik.touched.email && formik.errors.email && (
-          <Box sx={{ color: "red" }}>{formik.errors.email}</Box>
+          <Box sx={{ color: "red", fontSize: 12 }}>{formik.errors.email}</Box>
         )}
 
         <Input
-          sx={{ backgroundColor: "white" }}
-          placeholder="Password"
           id="password"
           name="password"
+          placeholder="Password"
           type="password"
+          value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.password}
+          sx={{ backgroundColor: "white" }}
         />
         {formik.touched.password && formik.errors.password && (
-          <Box sx={{ color: "red" }}>{formik.errors.password}</Box>
+          <Box sx={{ color: "red", fontSize: 12 }}>
+            {formik.errors.password}
+          </Box>
         )}
 
-        <Paragraph sx={{ textAlign: "right" }}>
+        <Paragraph sx={{ textAlign: "right", fontSize: 14 }}>
           Already have an account?{" "}
-          <Link
-            to="/sign-in"
-            style={{
-              color: "blue",
-              cursor: "pointer",
-              fontWeight: "600",
-              textDecoration: "none",
-            }}
-          >
+          <Link to="/sign-in" style={{ color: "blue", textDecoration: "none" }}>
             Log in
           </Link>
         </Paragraph>
 
-        {loading ? (
-          <Button
-            sx={{
-              marginTop: 20,
-              backgroundColor: "#192A41",
-              borderRadius: 50,
-              padding: 20,
-              cursor: "pointer",
-            }}
-            type="button"
-          >
-            <Spinner sx={{ color: "white" }} />
-          </Button>
-        ) : (
-          <Button
-            sx={{
-              marginTop: 20,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "blue",
-              color: "black",
-              border: "1px solid",
-              borderRadius: "8px",
-              width: "100%",
-              padding: "12px",
-              fontSize: "16px",
-              cursor: "pointer",
-              marginBottom: "10px",
-              fontWeight: 600,
-            }}
-            type="submit"
-          >
-            Sign Up
-          </Button>
-        )}
+        <Button
+          type="submit"
+          disabled={loading}
+          sx={{
+            mt: 3,
+            backgroundColor: loading ? "#192A41" : "blue",
+            color: "white",
+            fontWeight: "bold",
+            padding: "12px",
+            borderRadius: "8px",
+            cursor: loading ? "not-allowed" : "pointer",
+          }}
+        >
+          {loading ? <Spinner /> : "Sign Up"}
+        </Button>
       </Flex>
     </Box>
   );

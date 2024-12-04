@@ -1,6 +1,13 @@
-import { Box, Button, Input, Paragraph, Text } from "theme-ui";
+import { useNavigate } from "react-router-dom";
+import { Box, Button, Image, Input, Paragraph, Text } from "theme-ui";
 
 export default function DashBoard() {
+  const navigate = useNavigate();
+
+  const handleProfile = () => {
+    navigate("/edit-profile");
+  };
+
   return (
     <Box
       sx={{
@@ -33,7 +40,7 @@ export default function DashBoard() {
         <Box sx={{ display: "flex", gap: "20px" }}>
           <img src="/add.png" alt="Add Icon" />
           <img src="/search (2).png" alt="Search Icon" />
-          <img src="/vectoere.png" alt="Menu Icon" />
+          <img src="/vinijr.png" alt="Menu Icon" />
         </Box>
       </Box>
 
@@ -65,14 +72,16 @@ export default function DashBoard() {
           mb: "20px",
         }}
       >
-        <img
+        <Image
           src="/Ellipse 1.png"
           alt="Profile Icon"
           style={{
             width: "45px",
             height: "45px",
             borderRadius: "50%",
+            cursor: "pointer",
           }}
+          onClick={handleProfile}
         />
         <Input
           placeholder="What do you want to ask?"

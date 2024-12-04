@@ -1,5 +1,14 @@
 const BASE_URL = "https://secondaryschoolquora.onrender.com"; // Replace with your actual base URL
 
+// Timeout utility for fetch
+const fetchWithTimeout = (url: string, options: RequestInit, timeout = 10000) =>
+  Promise.race([
+    fetch(url, options),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Request timeout")), timeout)
+    ),
+  ]);
+
 // Helper function for API calls
 const apiCall = async (
   endpoint: string,
@@ -11,26 +20,22 @@ const apiCall = async (
     "Content-Type": "application/json",
   };
 
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) headers.Authorization = `Bearer ${token}`;
 
   try {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const response = await fetchWithTimeout(`${BASE_URL}${endpoint}`, {
       method,
       headers,
       body: body ? JSON.stringify(body) : null,
     });
 
     const data = await response.json();
-
     if (!response.ok) {
-      throw new Error(data.message || "Something went wrong");
+      throw new Error(data.message || "An error occurred");
     }
-
     return data;
   } catch (error) {
-    console.error(`Error in API call to ${endpoint}:`, error);
+    console.error(`Error in API call to ${endpoint}:`, error.message || error);
     throw error;
   }
 };
@@ -44,6 +49,9 @@ export const registerUser = async (
   password: string
 ) => {
   return apiCall("/register", "POST", { username, email, password });
+};
+export const signInWithGoogle = async (idToken: any) => {
+  return apiCall("/auth", "POST", { idToken });
 };
 
 // Log in a user

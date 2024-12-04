@@ -1,24 +1,35 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Heading, Button, Text, Paragraph } from "theme-ui";
-
+import { signInWithGoogle } from "../utils/apiService";
+// import { gapi } from "gapi-script";
 // import { useEffect } from "react";
 
 export default function SignUp2() {
   const navigate = useNavigate();
 
-  // Function to handle Google sign-up
   const handleGoogleSignUp = async () => {
     try {
-      const result = await signInWithPopup(auth);
-      const user = result.user;
+      // Initialize Google API client (ensure this is done somewhere globally)
+      const auth2 = gapi.auth2.getAuthInstance();
+      if (!auth2) {
+        throw new Error("Google Auth instance not initialized");
+      }
 
-      // Optionally, send user information to your backend for account creation
-      console.log("Google sign-up successful:", user);
+      // Trigger Google Sign-In
+      const googleUser = await auth2.signIn();
 
-      // Redirect or show success message
-      navigate("/dashboard"); // Redirect to the dashboard or preferred page
+      // Extract the Google ID token
+      const idToken = googleUser.getAuthResponse().id_token;
+      console.log("Google ID Token:", idToken);
+
+      // Send the ID token to the backend for registration
+      const result = await signInWithGoogle(idToken);
+      console.log("Backend registration successful:", result);
+
+      // Navigate to dashboard or show a success message
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Error during Google sign-up:", error.message);
+      console.error("Error during Google sign-up:", error.message || error);
       alert("Google sign-up failed. Please try again.");
     }
   };
