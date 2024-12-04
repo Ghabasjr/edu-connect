@@ -56,12 +56,41 @@ const apiCall = async (
 // Authentication APIs
 
 // Register a new user
+// export const registerUser = async (
+//   username: string,
+//   email: string,
+//   password: string
+// ) => {
+//   return apiCall("/register", "POST", { username, email, password });
+// };
+
 export const registerUser = async (
   username: string,
   email: string,
   password: string
 ) => {
-  return apiCall("/register", "POST", { username, email, password });
+  try {
+    const response = await apiCall("/register", "POST", {
+      username,
+      email,
+      password,
+    });
+
+    // Ensure response is valid
+    if (response.status === 201) {
+      return response.data;
+    } else {
+      throw new Error(response.data.message || "Registration failed");
+    }
+  } catch (error) {
+    if (error.response) {
+      // Server error
+      throw new Error(error.response.data.message || "Registration error");
+    } else {
+      // Network or unexpected error
+      throw new Error("An unexpected error occurred. Please try again.");
+    }
+  }
 };
 
 export const signInWithGoogle = async (idToken: unknown) => {

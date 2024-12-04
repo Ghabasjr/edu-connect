@@ -17,6 +17,8 @@ import { loginUser, signInWithGoogle } from "../utils/apiService";
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  navigate("/subject-category");
+
   // const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -48,7 +50,6 @@ const SignIn: React.FC = () => {
           localStorage.setItem("authToken", response?.token || "");
 
           // Navigate to the next page
-          navigate("/subject-category");
         } else {
           setErrorMessage("Invalid credentials. Please try again.");
         }

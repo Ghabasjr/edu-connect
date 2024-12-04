@@ -16,6 +16,7 @@ import { registerUser } from "../utils/apiService";
 export default function SignUp() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  navigate("/email-verification");
 
   const formik = useFormik({
     initialValues: {
@@ -45,6 +46,8 @@ export default function SignUp() {
     }),
 
     onSubmit: async (values) => {
+      if (loading) return; // Prevent duplicate submissions
+
       setLoading(true);
       try {
         const data = await registerUser(
@@ -55,8 +58,6 @@ export default function SignUp() {
         console.log("Registration successful:", data);
 
         // Redirect to email verification page
-        navigate("/email-verification");
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         alert(error.message || "Registration failed. Please try again.");
       } finally {
@@ -68,6 +69,7 @@ export default function SignUp() {
   return (
     <Box
       as="form"
+      onSubmit={formik.handleSubmit} // Ensure Formik's submit handler is called
       sx={{
         maxWidth: 400,
         margin: "0 auto",
@@ -139,7 +141,7 @@ export default function SignUp() {
         </Paragraph>
 
         <Button
-          type="submit"
+          type="submit" // Ensure the button triggers form submission
           disabled={loading}
           sx={{
             mt: 3,
