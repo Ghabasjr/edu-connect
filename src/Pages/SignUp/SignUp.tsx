@@ -43,7 +43,6 @@ export default function SignUp() {
         )
         .required("Password is required"),
     }),
-
     onSubmit: async (values) => {
       if (loading) return; // Prevent duplicate submissions
 
@@ -59,7 +58,13 @@ export default function SignUp() {
         // Redirect to email verification page
         navigate("/email-verification");
       } catch (error: unknown) {
-        alert(error.message || "Registration failed. Please try again.");
+        const getErrorMessage = (error: unknown): string => {
+          if (error instanceof Error) {
+            return error.message;
+          }
+          return "Registration failed. Please try again later.";
+        };
+        alert(getErrorMessage(error));
       } finally {
         setLoading(false);
       }

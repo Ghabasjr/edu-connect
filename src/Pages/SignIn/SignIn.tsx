@@ -21,6 +21,7 @@ const SignIn: React.FC = () => {
   // const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  navigate("/subject-category");
   // const togglePasswordVisibility = () => {
   //   setIsPasswordVisible(!isPasswordVisible);
   // };
@@ -28,7 +29,7 @@ const SignIn: React.FC = () => {
   // Formik for form handling and validation
   const formik = useFormik({
     initialValues: {
-      identifier: "",
+      email: "",
       password: "",
     },
     validationSchema: Yup.object({
@@ -42,14 +43,13 @@ const SignIn: React.FC = () => {
       setErrorMessage(null);
 
       try {
-        const response = await loginUser(values.identifier, values.password);
+        const response = await loginUser(values.email, values.password);
 
         if (response?.message === "Login successful") {
           // Save token or other user data
           localStorage.setItem("authToken", response?.token || "");
 
           // Navigate to the next page
-          navigate("/subject-category");
         } else {
           setErrorMessage("Invalid credentials. Please try again.");
         }
@@ -183,14 +183,14 @@ const SignIn: React.FC = () => {
               id="identifier"
               name="identifier"
               placeholder="Enter your email or username"
-              value={formik.values.identifier}
+              value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               sx={{ bg: "white" }}
             />
-            {formik.touched.identifier && formik.errors.identifier && (
+            {formik.touched.email && formik.errors.email && (
               <Text sx={{ color: "red", fontSize: 12, mt: 1 }}>
-                {formik.errors.identifier}
+                {formik.errors.email}
               </Text>
             )}
           </Box>
