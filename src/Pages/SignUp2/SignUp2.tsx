@@ -42,6 +42,7 @@ export default function SignUp2() {
 
   // Function to handle Email sign-up
   const handleEmailSignUp = () => {
+    console.log("Navigating to / sign-up");
     navigate("/sign-up"); // Redirect to the email sign-up page
   };
 

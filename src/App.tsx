@@ -31,8 +31,8 @@ export default function App() {
       <Routes>
         <Route index element={<WelcomePage />} />
         <Route path="/sign-up2" element={<SignUp2 />} />
-        <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
         <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/subject-category" element={<SubjectCategory />} />
         <Route path="/profile-setup" element={<ProfileSetup />} />
