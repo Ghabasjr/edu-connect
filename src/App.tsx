@@ -29,7 +29,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route index element={<WelcomePage />} />
         <Route path="/sign-up2" element={<SignUp2 />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
