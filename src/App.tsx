@@ -11,19 +11,13 @@ import DashBoard from "./Components/DashBoard/DashBoard";
 import EditProfile from "./Pages/EditProfile/EditProfile";
 import PostPage from "./Pages/PostPage/PostPage";
 
+import { setupGoogleAPI } from "./Pages/utils/gapiSetup";
+
 import { useEffect } from "react";
 
 export default function App() {
-  const initGoogleApi = () => {
-    gapi.load("auth2", () => {
-      gapi.auth2.init({
-        client_id: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com", // Replace with your Google Client ID
-      });
-    });
-  };
-
   useEffect(() => {
-    initGoogleApi();
+    setupGoogleAPI(); // Initializes Google API
   }, []);
 
   return (

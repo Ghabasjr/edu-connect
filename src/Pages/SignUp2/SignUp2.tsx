@@ -1,48 +1,40 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Heading, Button, Text, Paragraph } from "theme-ui";
-import { signInWithGoogle } from "../utils/apiService";
-// import { gapi } from "gapi-script";
-// import { useEffect } from "react";
+import { signInWithGoogle } from "../utils/apiService"; // Importing the API functions
+import { gapi } from "gapi-script"; // Google API client library
 
 export default function SignUp2() {
   const navigate = useNavigate();
   const handleGoogleSignUp = async () => {
     try {
-      // Initialize Google API client (ensure this is done somewhere globally)
-      const auth2 = gapi.auth2.getAuthInstance();
-      if (!auth2) {
-        throw new Error("Google Auth instance not initialized");
-      }
+      const auth2 = gapi.auth2.getAuthInstance(); // Get Google Auth instance
+      const googleUser = await auth2.signIn(); // Open Google Sign-In pop-up
+      const idToken = googleUser.getAuthResponse().id_token; // Get ID Token
 
-      // Trigger Google Sign-In
-      const googleUser = await auth2.signIn();
-
-      // Extract the Google ID token
-      const idToken = googleUser.getAuthResponse().id_token;
       console.log("Google ID Token:", idToken);
 
-      // Send the ID token to the backend for registration
+      // Use the ID Token for backend API calls
       const result = await signInWithGoogle(idToken);
-      console.log("Backend registration successful:", result);
+      console.log("Google Sign-In Success:", result);
 
-      // Navigate to dashboard or show a success message
-      navigate("/dashboard");
+      navigate("/dashboard"); // Redirect to the dashboard on success
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.error("Error during Google sign-up:", error.message);
+        // Now TypeScript knows error is an instance of Error
+        console.error("Google Sign-Up Error:", error.message);
       } else {
+        // Handle case where error is not an instance of Error
         console.error(
           "An unknown error occurred during Google sign-up:",
           error
         );
       }
-      alert("Google sign-up failed. Please try again.");
+      alert("Google sign-in failed. Please try again.");
     }
   };
 
-  // Function to handle Email sign-up
+  // Email Sign-Up handler
   const handleEmailSignUp = () => {
-    console.log("Navigating to / sign-up");
     navigate("/sign-up"); // Redirect to the email sign-up page
   };
 
