@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Heading, Text, Input, Button } from "theme-ui";
+import { Box, Heading, Text, Input, Button, Spinner } from "theme-ui";
 
 function ProfileSetup() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    navigate("/dash-board");
+    setLoading(true);
+    setTimeout(() => {
+      navigate("/dash-board");
+      setLoading(false);
+    }, 1500);
   };
 
   const inputStyles = {
@@ -18,14 +24,12 @@ function ProfileSetup() {
     paddingY: 1,
     width: "100%",
   };
-  const imgStyles = {
-    // background: "white",
-    // backgroundColor: "white",
-  };
+  const imgStyles = {};
 
   return (
     <>
       <Box
+        as="form"
         sx={{
           maxWidth: 400,
           margin: "auto auto",
@@ -54,16 +58,6 @@ function ProfileSetup() {
           >
             <img src="/camera.png" alt="Profile Setup Icon" style={imgStyles} />
           </Button>
-        </Box>
-
-        <Box sx={{ gap: 20, mt: 4 }}>
-          <Text>
-            Username
-            <img src="/_.png" alt="Underline Icon" />
-          </Text>
-          <Box sx={{ mt: 3 }}>
-            <Input sx={inputStyles} placeholder="Enter your username" />
-          </Box>
         </Box>
 
         <Box sx={{ gap: 20, mt: 4 }}>
@@ -111,10 +105,12 @@ function ProfileSetup() {
               background: "white",
               border: "1px solid black",
               borderRadius: "54px",
+              cursor: loading ? "not-allowed" : "pointer",
             }}
             onClick={handleSubmit}
+            disabled={loading}
           >
-            DONE
+            {loading ? <Spinner size={24} /> : "DONE"}
           </Button>
         </Box>
       </Box>

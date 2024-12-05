@@ -1,37 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Heading, Button, Text, Paragraph } from "theme-ui";
-import { signInWithGoogle } from "../utils/apiService"; // Importing the API functions
-import { gapi } from "gapi-script"; // Google API client library
 
 export default function SignUp2() {
   const navigate = useNavigate();
-  const handleGoogleSignUp = async () => {
-    try {
-      const auth2 = gapi.auth2.getAuthInstance(); // Get Google Auth instance
-      const googleUser = await auth2.signIn(); // Open Google Sign-In pop-up
-      const idToken = googleUser.getAuthResponse().id_token; // Get ID Token
-
-      console.log("Google ID Token:", idToken);
-
-      // Use the ID Token for backend API calls
-      const result = await signInWithGoogle(idToken);
-      console.log("Google Sign-In Success:", result);
-
-      navigate("/dashboard"); // Redirect to the dashboard on success
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        // Now TypeScript knows error is an instance of Error
-        console.error("Google Sign-Up Error:", error.message);
-      } else {
-        // Handle case where error is not an instance of Error
-        console.error(
-          "An unknown error occurred during Google sign-up:",
-          error
-        );
-      }
-      alert("Google sign-in failed. Please try again.");
-    }
-  };
 
   // Email Sign-Up handler
   const handleEmailSignUp = () => {
@@ -79,33 +50,6 @@ export default function SignUp2() {
           community
         </Text>
       </Box>
-
-      {/* Google Sign-Up Button */}
-      <Button
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "white",
-          color: "black",
-          border: "1px solid",
-          borderRadius: "8px",
-          width: "100%",
-          padding: "12px",
-          fontSize: "16px",
-          cursor: "pointer",
-          marginBottom: "10px",
-          fontWeight: 600,
-        }}
-        onClick={handleGoogleSignUp}
-      >
-        <img
-          src="/search.png" // Google logo
-          alt="Google logo"
-          style={{ width: "24px", height: "24px", marginRight: "10px" }}
-        />
-        Sign up with Google
-      </Button>
 
       {/* Email Sign-Up Button */}
       <Button

@@ -201,21 +201,22 @@ export default function ProfilePage() {
       >
         <Text>You have not shared, answered, or posted anything yet.</Text>
       </Box>
-
-      <Button
-        sx={{
-          backgroundColor: "white",
-          borderRadius: "50px",
-          width: "60px",
-          height: "60px",
-          fontSize: ["14px", "16px"],
-          marginBottom: "20px",
-          cursor: "pointer",
-        }}
-        onClick={handlePost}
-      >
-        <img src="onet0two.png" alt="Add Post" />
-      </Button>
+      <Box sx={{ display: "flex", alignItems: "end", mt: "60px" }}>
+        <Button
+          sx={{
+            backgroundColor: "white",
+            borderRadius: "50px",
+            width: "60px",
+            height: "60px",
+            fontSize: ["14px", "16px"],
+            marginBottom: "20px",
+            cursor: "pointer",
+          }}
+          onClick={handlePost}
+        >
+          <img src="onet0two.png" alt="Add Post" />
+        </Button>
+      </Box>
     </Box>
   );
 }

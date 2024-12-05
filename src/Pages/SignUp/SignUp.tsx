@@ -111,7 +111,7 @@ export default function SignUp() {
             id="email"
             name="email"
             placeholder="Email"
-            type="email"
+            type="password"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

@@ -11,15 +11,7 @@ import DashBoard from "./Components/DashBoard/DashBoard";
 import EditProfile from "./Pages/EditProfile/EditProfile";
 import PostPage from "./Pages/PostPage/PostPage";
 
-import { setupGoogleAPI } from "./Pages/utils/gapiSetup";
-
-import { useEffect } from "react";
-
 export default function App() {
-  useEffect(() => {
-    setupGoogleAPI(); // Initializes Google API
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>
