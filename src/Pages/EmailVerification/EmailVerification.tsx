@@ -43,7 +43,7 @@ function EmailVerification() {
             <Text>We sent a confirmation Email to:</Text>
             {/* write a logic to call the user email address */}
             <Text sx={{ display: "block", fontWeight: "bold" }}>
-              educonnect@gmail.com
+              {/* educonnect@gmail.com? */}
             </Text>
           </Box>
           <Box sx={{ mt: "30px", display: "flex", textAlign: "center" }}>

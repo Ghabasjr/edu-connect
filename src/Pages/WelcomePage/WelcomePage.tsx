@@ -112,10 +112,10 @@ export default function WelcomePage() {
         >
           <Button
             sx={{
-              backgroundColor: "white",
+              backgroundColor: "rgba(159,197,232,1)",
               color: "black",
-              border: "1px solid",
-              borderRadius: "8px",
+              // border: "1px solid",
+              borderRadius: "30px",
               width: "100%",
               padding: "12px",
               fontSize: [1, 2, 3],
@@ -131,7 +131,7 @@ export default function WelcomePage() {
               backgroundColor: "white",
               color: "black",
               border: "1px solid",
-              borderRadius: "8px",
+              borderRadius: "30px",
               width: "100%",
               padding: "12px",
               fontSize: [1, 2, 3],

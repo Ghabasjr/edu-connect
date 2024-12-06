@@ -10,6 +10,7 @@ import ProfileSetup from "./Pages/ProfileSetup/ProfileSetup";
 import DashBoard from "./Components/DashBoard/DashBoard";
 import EditProfile from "./Pages/EditProfile/EditProfile";
 import PostPage from "./Pages/PostPage/PostPage";
+// import MenuPage from "./Pages/MenuPage/MenuPage";
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/dash-board" element={<DashBoard />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/post-page" element={<PostPage />} />
+        {/* <Route path="/menu-page" element={<MenuPage />} /> */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -10,12 +10,19 @@ import {
   Paragraph,
   Button,
   Spinner,
+  IconButton,
 } from "theme-ui";
 import { registerUser } from "../utils/apiService";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function SignUp() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +51,7 @@ export default function SignUp() {
         .required("Password is required"),
     }),
     onSubmit: async (values) => {
-      if (loading) return; // Prevent duplicate submissions
+      if (loading) return;
 
       setLoading(true);
       try {
@@ -55,7 +62,6 @@ export default function SignUp() {
         );
         console.log("Registration successful:", data);
 
-        // Redirect to email verification page
         navigate("/email-verification");
       } catch (error: unknown) {
         const getErrorMessage = (error: unknown): string => {
@@ -111,7 +117,7 @@ export default function SignUp() {
             id="email"
             name="email"
             placeholder="Email"
-            type="password"
+            type="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -121,16 +127,31 @@ export default function SignUp() {
             <Box sx={{ color: "red", fontSize: 12 }}>{formik.errors.email}</Box>
           )}
 
-          <Input
-            id="password"
-            name="password"
-            placeholder="Password"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            sx={{ backgroundColor: "white" }}
-          />
+          <Box sx={{ position: "relative" }}>
+            <Input
+              id="password"
+              name="password"
+              placeholder="Password"
+              type={showPassword ? "text" : "password"}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              sx={{ backgroundColor: "white", pr: "40px" }}
+            />
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "50%",
+                right: "10px",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+              }}
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}{" "}
+              {/* Replace with actual icons */}
+            </IconButton>
+          </Box>
           {formik.touched.password && formik.errors.password && (
             <Box sx={{ color: "red", fontSize: 12 }}>
               {formik.errors.password}
@@ -148,7 +169,7 @@ export default function SignUp() {
           </Paragraph>
 
           <Button
-            type="submit" // Ensure the button triggers form submission
+            type="submit"
             disabled={loading}
             sx={{
               mt: 3,

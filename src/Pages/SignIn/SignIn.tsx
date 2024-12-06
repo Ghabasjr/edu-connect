@@ -8,16 +8,23 @@ import {
   Spinner,
   Message,
   Text,
+  IconButton,
 } from "@theme-ui/components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../utils/apiService";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const login = async (email: string, password: string) => {
     setLoading(true);
@@ -39,11 +46,25 @@ const useLogin = () => {
     }
   };
 
-  return { login, loading, errorMessage, setErrorMessage };
+  return {
+    login,
+    loading,
+    errorMessage,
+    setErrorMessage,
+    togglePasswordVisibility,
+    showPassword,
+  };
 };
 
 const SignIn: React.FC = () => {
-  const { login, loading, errorMessage, setErrorMessage } = useLogin();
+  const {
+    login,
+    loading,
+    errorMessage,
+    setErrorMessage,
+    togglePasswordVisibility,
+    showPassword,
+  } = useLogin();
 
   const formik = useFormik({
     initialValues: {
@@ -129,18 +150,33 @@ const SignIn: React.FC = () => {
             )}
           </Box>
 
-          <Box>
+          <Box sx={{ position: "relative" }}>
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              sx={{ bg: "white" }}
+              sx={{ bg: "white", pr: "40px" }}
             />
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "66%",
+                right: "10px",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                background: "transparent",
+                border: "none",
+                outline: "none",
+              }}
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </IconButton>
             {formik.touched.password && formik.errors.password && (
               <Text sx={{ color: "red", fontSize: 12, mt: 1 }}>
                 {formik.errors.password}
@@ -156,8 +192,9 @@ const SignIn: React.FC = () => {
               py: 2,
               borderRadius: "4px",
               fontWeight: "bold",
-              cursor: "pointer",
+              cursor: loading ? "not-allowed" : "pointer",
               mt: 3,
+              opacity: loading ? 0.7 : 1,
             }}
             disabled={loading}
           >

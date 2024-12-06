@@ -21,7 +21,9 @@ const apiCall = async (
     "Content-Type": "application/json",
   };
 
-  if (token) headers.Authorization = `Bearer ${token}`;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
 
   try {
     const response = await fetchWithTimeout(`${BASE_URL}${endpoint}`, {
