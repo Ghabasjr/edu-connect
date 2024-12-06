@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Image, Input, Paragraph, Text, Flex } from "theme-ui";
 import HorizontalLine from "../HorizontalLine/HorizontalLine";
