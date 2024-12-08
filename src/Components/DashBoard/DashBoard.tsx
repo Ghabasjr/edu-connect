@@ -2,6 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Image, Input, Paragraph, Text, Flex } from "theme-ui";
 import HorizontalLine from "../HorizontalLine/HorizontalLine";
+import { GoHome } from "react-icons/go";
+import { IoIosNotifications } from "react-icons/io";
+import { CiCircleQuestion, CiSettings } from "react-icons/ci";
+import { TbLogout } from "react-icons/tb";
+
+import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 export default function DashBoard() {
   const navigate = useNavigate();
@@ -10,7 +16,9 @@ export default function DashBoard() {
   const handleProfile = () => {
     navigate("/edit-profile");
   };
-
+  const handleQuestion = () => {
+    navigate("/post-page");
+  };
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -107,10 +115,11 @@ export default function DashBoard() {
             sx={{
               flex: 1,
               borderRadius: "20px",
-              border: "1px solid #ccc",
+              border: "1px solid black",
               padding: "10px",
               backgroundColor: "white",
             }}
+            onClick={handleQuestion}
           />
         </Box>
 
@@ -283,28 +292,31 @@ export default function DashBoard() {
 
           <Flex sx={{ flexDirection: "column", gap: "20px" }}>
             <HorizontalLine />
-            <Text sx={{ fontSize: "18px", cursor: "pointer" }}>🏠 Home</Text>
+            <Text sx={{ fontSize: "18px", cursor: "pointer" }}>
+              <GoHome /> Home
+            </Text>
             <Text sx={{ fontSize: "18px", cursor: "pointer" }}>
               ❓ Questions
             </Text>
             <Text sx={{ fontSize: "18px", cursor: "pointer" }}>
-              📚 Subject Categories
+              <HiOutlineAdjustmentsHorizontal /> Subject Categories
             </Text>
             <Text sx={{ fontSize: "18px", cursor: "pointer" }}>
-              🔔 Notifications
+              <IoIosNotifications /> Notifications
             </Text>
             <HorizontalLine />
             <Text sx={{ fontSize: "18px", cursor: "pointer" }}>
-              ⚙️ Settings & Privacy
+              <CiSettings />
+              Settings & Privacy
             </Text>
             <Text sx={{ fontSize: "18px", cursor: "pointer" }}>
-              🆘 Help Center
+              <CiCircleQuestion /> Help Center
             </Text>
             <Text
               sx={{ fontSize: "18px", cursor: "pointer" }}
               onClick={handleLogout}
             >
-              🔓 Logout
+              <TbLogout /> Logout
             </Text>
           </Flex>
         </Box>

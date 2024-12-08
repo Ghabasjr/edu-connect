@@ -20,7 +20,8 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = (event: React.MouseEvent) => {
+    event.preventDefault();
     setShowPassword(!showPassword);
   };
 

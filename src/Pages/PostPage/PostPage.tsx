@@ -1,11 +1,27 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Close, Image, Select, Textarea } from "theme-ui";
 
 export default function PostPage() {
   const navigate = useNavigate();
+  const [question, setQuestion] = useState("");
+  const [showDiscardPopup, setShowDiscardPopup] = useState(false);
 
   const handleNavigate = () => {
-    navigate("/edit-profile");
+    if (question.trim()) {
+      setShowDiscardPopup(true);
+    } else {
+      navigate("/edit-profile");
+    }
+  };
+
+  const handleDiscard = () => {
+    setShowDiscardPopup(false);
+    setQuestion("");
+  };
+
+  const handleContinue = () => {
+    setShowDiscardPopup(false);
   };
 
   return (
@@ -34,11 +50,12 @@ export default function PostPage() {
       >
         <Close onClick={handleNavigate} sx={{ cursor: "pointer" }} />
         <Button
+          disabled={!question.trim()}
           sx={{
-            backgroundColor: "primary",
-            color: "gray",
+            backgroundColor: question.trim() ? "#007bff" : "gray",
+            color: "white",
             fontWeight: "bold",
-            cursor: "pointer",
+            cursor: question.trim() ? "pointer" : "not-allowed",
             borderRadius: "20px",
             padding: "5px 15px",
           }}
@@ -80,7 +97,7 @@ export default function PostPage() {
             border: "1px solid #ccc",
             padding: "5px 10px",
             fontSize: "16px",
-            backgroundColor: "white",
+            backgroundColor: "#9fc5e8",
             boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1)",
           }}
         >
@@ -110,6 +127,8 @@ export default function PostPage() {
       >
         <Textarea
           placeholder="What's your question?"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
           sx={{
             width: "100%",
             minHeight: "150px",
@@ -120,6 +139,68 @@ export default function PostPage() {
           }}
         />
       </Box>
+
+      {/* Discard Popup */}
+      {showDiscardPopup && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1000,
+          }}
+        >
+          <Box
+            sx={{
+              backgroundColor: "black",
+              borderRadius: "10px",
+              padding: "20px",
+              textAlign: "center",
+              width: "80%",
+              maxWidth: "400px",
+            }}
+          >
+            <p>Are you sure you want to discard this question?</p>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                marginTop: "20px",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                onClick={handleDiscard}
+                sx={{
+                  backgroundColor: "black",
+                  color: "white",
+                  borderRadius: "10px",
+                  padding: "5px 15px",
+                }}
+              >
+                Discard
+              </Button>
+              <Button
+                onClick={handleContinue}
+                sx={{
+                  backgroundColor: "blue",
+                  color: "white",
+                  borderRadius: "10px",
+                  padding: "5px 15px",
+                }}
+              >
+                Continue
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }
