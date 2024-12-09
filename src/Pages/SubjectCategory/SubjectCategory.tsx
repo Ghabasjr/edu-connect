@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Heading, Radio, Text, Spinner, Alert } from "theme-ui";
-import { updateUserProfile } from "../utils/apiService"; // Assuming the same API service is used
+import { updateUserProfile } from "../utils/apiService"; // the same API service is used as setup profile
 
 export default function SubjectCategory() {
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const token = getCookie("authToken"); // Replace "authToken" with the actual cookie name
+  const token = getCookie("authToken"); //  "authToken"
 
   const handleCheckboxChange = (subject: string) => {
     setSelectedSubjects((prev) =>
@@ -34,7 +34,8 @@ export default function SubjectCategory() {
     }
 
     try {
-      await updateUserProfile({ subjects: selectedSubjects }, token);
+      // Convert selectedSubjects to a comma-separated string
+      await updateUserProfile({ subjects: selectedSubjects.join(",") }, token);
       navigate("/profile-setup");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
