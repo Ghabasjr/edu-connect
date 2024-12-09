@@ -19,10 +19,15 @@ export default function DashBoard() {
   const handleQuestion = () => {
     navigate("/post-page");
   };
+  const handleSearch = () => {
+    navigate("/search");
+  };
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  const handleNotify = () => {
+    navigate("/notifications-page");
+  };
   const handleLogout = () => {
     localStorage.removeItem("token");
     sessionStorage.clear();
@@ -61,7 +66,11 @@ export default function DashBoard() {
           />
           <Box sx={{ display: "flex", gap: "20px" }}>
             <img src="/add.png" alt="Add Icon" />
-            <img src="/search (2).png" alt="Search Icon" />
+            <img
+              src="/search (2).png"
+              alt="Search Icon"
+              onClick={handleSearch}
+            />
             <img
               src="/vinijr.png"
               alt="Menu Icon"
@@ -85,7 +94,11 @@ export default function DashBoard() {
           <img src="/home.png" alt="Home Icon" />
           <img src="/home3.png" alt="Explore Icon" />
           <img src="/icon4.png" alt="Bookmark Icon" />
-          <img src="/notification.png" alt="Notification Icon" />
+          <img
+            src="/notification.png"
+            alt="Notification Icon"
+            onClick={handleNotify}
+          />
         </Box>
 
         {/* Input Section */}

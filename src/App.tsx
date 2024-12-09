@@ -10,6 +10,8 @@ import ProfileSetup from "./Pages/ProfileSetup/ProfileSetup";
 import DashBoard from "./Components/DashBoard/DashBoard";
 import EditProfile from "./Pages/EditProfile/EditProfile";
 import PostPage from "./Pages/PostPage/PostPage";
+import Search from "./Pages/Search/Search";
+import NotificationsPage from "./Pages/NotificationsPage/NotificationsPage";
 // import MenuPage from "./Pages/MenuPage/MenuPage";
 
 export default function App() {
@@ -27,6 +29,8 @@ export default function App() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/post-page" element={<PostPage />} />
         {/* <Route path="/menu-page" element={<MenuPage />} /> */}
+        <Route path="/search" element={<Search />} />
+        <Route path="/notifications-page" element={<NotificationsPage />} />
       </Routes>
     </BrowserRouter>
   );
