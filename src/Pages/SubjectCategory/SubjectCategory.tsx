@@ -36,7 +36,7 @@ export default function SubjectCategory() {
     try {
       // Convert selectedSubjects to a comma-separated string
       await updateUserProfile({ subjects: selectedSubjects.join(",") }, token);
-      navigate("/profile-setup");
+      navigate("/dash-board");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Failed to save subjects. Please try again.");

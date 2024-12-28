@@ -19,7 +19,7 @@ export default function Search() {
     <>
       <Box
         sx={{
-          width: "375px",
+          width: ["375px", "100%"],
           height: "812px",
           top: "360px",
           left: "104px",
@@ -29,6 +29,7 @@ export default function Search() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          alignContent: "center",
           fontFamily: "Arial, sans-serif",
         }}
       >
