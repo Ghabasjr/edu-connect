@@ -1,39 +1,94 @@
-// import { useState } from "react";
+// import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-// import { Box, Button, Image, Input, Paragraph, Text, Flex } from "theme-ui";
-// import HorizontalLine from "../HorizontalLine/HorizontalLine";
-// import { GoHome } from "react-icons/go";
-// import { IoIosNotifications } from "react-icons/io";
-// import { CiCircleQuestion, CiSettings } from "react-icons/ci";
-// import { TbLogout } from "react-icons/tb";
+// import { Box, Button, Flex, Image, Input, Paragraph, Text } from "theme-ui";
 // import { getUserProfile } from "../../Pages/utils/apiService";
+// import { IoIosNotifications } from "react-icons/io";
+// import HorizontalLine from "../HorizontalLine/HorizontalLine";
+// import { CiCircleQuestion, CiSettings } from "react-icons/ci";
 // import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
+// import { GoHome } from "react-icons/go";
+// import { TbLogout } from "react-icons/tb";
 
 // export default function DashBoard() {
 //   const navigate = useNavigate();
 //   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [userProfile, setUserProfile] = useState(null);
+//   const [error, setError] = useState("");
+
+//   interface UserProfile {
+//     picture: string;
+//     name: string;
+//   }
+//   const userProfile: UserProfile = {
+//     picture: "/path-to-picture.png",
+//     name: "John Doe",
+//   };
+
+//   // useEffect(() => {
+//   //   const fetchProfile = async () => {
+//   //     try {
+//   //       const profile = await getUserProfile();
+//   //       setUserProfile(profile);
+//   //     } catch (err) {
+//   //       setError("Failed to fetch user profile. Please log in again.");
+//   //       console.error(err);
+//   //     }
+//   //   };
+
+//   //   // Redirect to login if no token
+//   //   if (!localStorage.getItem("token")) {
+//   //     navigate("/sign-in");
+//   //   } else {
+//   //     fetchProfile();
+//   //   }
+//   // }, [navigate]);
+
+//   useEffect(() => {
+//     const fetchProfile = async () => {
+//       try {
+//         const token = localStorage.getItem("token");
+//         if (!token) {
+//           navigate("/sign-in");
+//           return;
+//         }
+
+//         const profile = await getUserProfile(token); // Pass token here
+//         setUserProfile(profile);
+//       } catch (err) {
+//         setError("Failed to fetch user profile. Please log in again.");
+//         console.error(err);
+//       }
+//     };
+
+//     fetchProfile();
+//   }, [navigate]);
 
 //   const handleProfile = () => {
 //     navigate("/edit-profile");
 //   };
+
 //   const handleQuestion = () => {
 //     navigate("/post-page");
 //   };
+
 //   const handleSearch = () => {
 //     navigate("/search");
 //   };
+
 //   const toggleMenu = () => {
 //     setIsMenuOpen(!isMenuOpen);
 //   };
+
 //   const handleNotify = () => {
 //     navigate("/notifications-page");
 //   };
+
 //   const handleLogout = () => {
 //     localStorage.removeItem("token");
 //     sessionStorage.clear();
-
 //     navigate("/sign-in");
 //   };
+
 //   return (
 //     <>
 //       <Box
@@ -80,6 +135,29 @@
 //           </Box>
 //         </Box>
 
+//         {/* User Greeting */}
+//         <Box sx={{ mb: "20px", textAlign: "center" }}>
+//           {userProfile ? (
+//             <>
+//               <Image
+//                 src={userProfile?.picture || "/default-avatar.png"}
+//                 alt="Profile"
+//                 sx={{
+//                   width: "60px",
+//                   height: "60px",
+//                   borderRadius: "50%",
+//                   mb: "10px",
+//                 }}
+//               />
+//               <Text sx={{ fontSize: "18px", fontWeight: "bold" }}>
+//                 Welcome, {userProfile?.name || "Guest"}
+//               </Text>
+//             </>
+//           ) : (
+//             <Text>{error || "Loading user profile..."}</Text>
+//           )}
+//         </Box>
+
 //         {/* Bottom Navigation */}
 //         <Box
 //           sx={{
@@ -113,7 +191,7 @@
 //           }}
 //         >
 //           <Image
-//             src="/Ellipse 1.png"
+//             src={userProfile?.picture || "/Ellipse 1.png"}
 //             alt="Profile Icon"
 //             style={{
 //               width: "45px",
@@ -162,7 +240,11 @@
 //                 <img
 //                   src="/Ellipse 2 (1).png"
 //                   alt="User Avatar"
-//                   style={{ width: "45px", height: "45px", borderRadius: "50%" }}
+//                   style={{
+//                     width: "45px",
+//                     height: "45px",
+//                     borderRadius: "50%",
+//                   }}
 //                 />
 //                 <Box>
 //                   <Text sx={{ fontWeight: "bold", fontSize: "16px" }}>
@@ -199,20 +281,6 @@
 //               </Text>
 //             </Paragraph>
 
-//             {/* Action Buttons */}
-//             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-//               <Button
-//                 sx={{
-//                   display: "flex",
-//                   alignItems: "center",
-//                   gap: "5px",
-//                   borderRadius: "20px",
-//                   padding: "5px 10px",
-//                   backgroundColor: "background",
-//                   color: "black",
-//                   fontSize: "14px",
-//                 }}
-//               >
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Flex, Image, Input, Paragraph, Text } from "theme-ui";
@@ -227,27 +295,13 @@ import { TbLogout } from "react-icons/tb";
 export default function DashBoard() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [error, setError] = useState("");
 
-  // useEffect(() => {
-  //   const fetchProfile = async () => {
-  //     try {
-  //       const profile = await getUserProfile();
-  //       setUserProfile(profile);
-  //     } catch (err) {
-  //       setError("Failed to fetch user profile. Please log in again.");
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   // Redirect to login if no token
-  //   if (!localStorage.getItem("token")) {
-  //     navigate("/sign-in");
-  //   } else {
-  //     fetchProfile();
-  //   }
-  // }, [navigate]);
+  interface UserProfile {
+    picture: string;
+    name: string;
+  }
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -347,7 +401,7 @@ export default function DashBoard() {
             <>
               <Image
                 src={userProfile.picture || "/default-avatar.png"}
-                alt="User Avatar"
+                alt="Profile"
                 sx={{
                   width: "60px",
                   height: "60px",
@@ -356,7 +410,7 @@ export default function DashBoard() {
                 }}
               />
               <Text sx={{ fontSize: "18px", fontWeight: "bold" }}>
-                Welcome, {userProfile.name}
+                Welcome, {userProfile.name || "Guest"}
               </Text>
             </>
           ) : (
@@ -481,11 +535,14 @@ export default function DashBoard() {
             >
               History is the act of inquiring into the past in order to
               understand the issues of the present and plan ahead for the
-              future. One of the great scholars of history...{" "}
+              future. One of the great scholars of history...
               <Text sx={{ color: "#007BFF", cursor: "pointer" }}>
+                {" "}
                 Read more
               </Text>
             </Paragraph>
+
+            {/* Action Buttons */}
 
             {/* Action Buttons */}
             <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
