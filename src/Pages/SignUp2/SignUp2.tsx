@@ -13,13 +13,19 @@ export default function SignUp2() {
     <Box
       as="form"
       sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: ["column", "row"],
+        justifyContent: "space-around",
+        alignItems: "center",
+        gap: [20, 30],
         width: "100%",
         mt: "80px",
         fontWeight: 600,
-        maxWidth: 400,
+        // maxWidth: 400,
         margin: "auto auto",
         alignContent: "center",
-        height: "100vh",
+
         background: "linear-gradient(to bottom,#9fc5e8, #f2f2f2)",
       }}
     >
@@ -37,49 +43,54 @@ export default function SignUp2() {
           style={{ width: "100px", height: "100px" }}
         />
       </Box>
-      <Box
-        sx={{
-          textAlign: "center",
-          marginBottom: "20px",
-          gap: 30,
-        }}
-      >
-        <Heading>SIGN UP</Heading>
-        <Text sx={{ mt: "10rem" }}>
-          Sign up now to be part of our <br />
-          community
-        </Text>
-      </Box>
+      <Box>
+        <Box
+          sx={{
+            textAlign: "center",
+            marginBottom: "20px",
+            gap: 30,
+          }}
+        >
+          <Heading>SIGN UP</Heading>
+          <Text sx={{ mt: "10rem" }}>
+            Sign up now to be part of our <br />
+            community
+          </Text>
+        </Box>
 
-      {/* Email Sign-Up Button */}
-      <Button
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "white",
-          color: "black",
-          border: "1px solid",
-          borderRadius: "8px",
-          width: "100%",
-          padding: "12px",
-          fontSize: "16px",
-          cursor: "pointer",
-          marginBottom: "10px",
-          fontWeight: 600,
-        }}
-        onClick={handleEmailSignUp}
-      >
-        Sign up with Email
-      </Button>
+        {/* Email Sign-Up Button */}
+        <Button
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "white",
+            color: "black",
+            border: "1px solid",
+            borderRadius: "8px",
+            width: "100%",
+            padding: "12px",
+            fontSize: "16px",
+            cursor: "pointer",
+            marginBottom: "10px",
+            fontWeight: 600,
+          }}
+          onClick={handleEmailSignUp}
+        >
+          Sign up with Email
+        </Button>
 
-      <Box sx={{ textAlign: "center", marginTop: "20px" }}>
-        <Paragraph>
-          Already have an account?{" "}
-          <Link to="/sign-in" style={{ color: "#4285F4", fontWeight: "bold" }}>
-            Log in
-          </Link>
-        </Paragraph>
+        <Box sx={{ textAlign: "center", marginTop: "20px" }}>
+          <Paragraph>
+            Already have an account?{" "}
+            <Link
+              to="/sign-in"
+              style={{ color: "#4285F4", fontWeight: "bold" }}
+            >
+              Log in
+            </Link>
+          </Paragraph>
+        </Box>
       </Box>
     </Box>
   );

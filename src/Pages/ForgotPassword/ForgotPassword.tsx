@@ -42,7 +42,7 @@ const ForgotPassword = () => {
         <Text
           sx={{
             fontFamily: "Roboto, sans-serif",
-            fontSize: ["16px", "20px", "24px"], // Responsive font sizes
+            fontSize: ["16px", "20px", "20px"], // Responsive font sizes
             fontWeight: 400,
             textAlign: "center",
             lineHeight: 1.5,

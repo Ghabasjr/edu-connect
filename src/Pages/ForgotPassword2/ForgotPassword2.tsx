@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Heading, Input, Text } from "theme-ui";
+import { Box, Button, Heading, Text } from "theme-ui";
+import OTPInput from "../../Components/OtpInput/OtpInput";
 
 const ForgotPassword2 = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const ForgotPassword2 = () => {
           <Heading
             sx={{
               fontFamily: "Roboto, sans-serif",
-              fontSize: ["32px", "48px", "64px"], // Responsive font sizes
+              fontSize: ["32px", "48px", "64px"],
               fontWeight: 700,
               textAlign: "center",
               lineHeight: 1.2,
@@ -53,8 +54,9 @@ const ForgotPassword2 = () => {
           >
             We sent a code to {}
           </Text>
-          <Input
-            placeholder="Enter your email"
+          <OTPInput />
+          {/* <Input
+            placeholder="Enter your code"
             sx={{
               width: "100%",
               maxWidth: "350px",
@@ -65,7 +67,7 @@ const ForgotPassword2 = () => {
               borderLeft: "none",
               borderRight: "none",
             }}
-          />
+          /> */}
           <Text>
             Didn't receive a code?{" "}
             <Link to="/forgot-password">Click to Resend</Link>
