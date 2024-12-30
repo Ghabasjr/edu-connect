@@ -82,7 +82,7 @@ export default function SignUp() {
     <form onSubmit={formik.handleSubmit}>
       <Box
         sx={{
-          maxWidth: 400,
+          maxWidth: 700,
           margin: "0 auto",
           height: "100vh",
           display: "flex",

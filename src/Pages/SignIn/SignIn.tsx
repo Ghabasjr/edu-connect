@@ -369,7 +369,7 @@ const SignIn: React.FC = () => {
         <form onSubmit={formik.handleSubmit}>
           <Flex sx={{ flexDirection: "column", gap: 3 }}>
             <Box>
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Username</Label>
               <Input
                 id="username"
                 name="username"
@@ -390,7 +390,7 @@ const SignIn: React.FC = () => {
               <Input
                 id="email"
                 name="email"
-                placeholder="Enter your email or username"
+                placeholder="Enter your email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

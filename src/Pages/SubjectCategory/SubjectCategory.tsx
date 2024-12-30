@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Heading, Radio, Text, Spinner, Alert } from "theme-ui";
-import { updateUserProfile } from "../utils/apiService"; // the same API service is used as setup profile
+import { updateUserProfile } from "../utils/apiService";
 
 export default function SubjectCategory() {
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const token = getCookie("authToken"); //  "authToken"
+
+  useEffect(() => {
+    console.log("Navigation function available:", !!navigate);
+  }, [navigate]);
 
   const handleCheckboxChange = (subject: string) => {
     setSelectedSubjects((prev) =>
@@ -27,6 +30,9 @@ export default function SubjectCategory() {
     setLoading(true);
     setError(null);
 
+    const token = getCookie("authToken");
+    console.log("Auth token present:", !!token); // Debug log
+
     if (!token) {
       setError("Authentication token is missing. Please log in again.");
       setLoading(false);
@@ -34,12 +40,25 @@ export default function SubjectCategory() {
     }
 
     try {
-      // Convert selectedSubjects to a comma-separated string
-      await updateUserProfile({ subjects: selectedSubjects.join(",") }, token);
+      console.log(
+        "Attempting to update profile with subjects:",
+        selectedSubjects
+      ); // Debug log
+      const response = await updateUserProfile(
+        { subjects: selectedSubjects.join(",") },
+        token
+      );
+      console.log("Profile update response:", response);
+
+      console.log("Attempting navigation to /dashboard");
       navigate("/dash-board");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(err.message || "Failed to save subjects. Please try again.");
+      console.error("Error details:", err);
+      setError(
+        err.response?.data?.message ||
+          err.message ||
+          "Failed to save subjects. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -161,8 +180,9 @@ export default function SubjectCategory() {
   );
 }
 
-// Utility function
 function getCookie(name: string): string | null {
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-  return match ? decodeURIComponent(match[2]) : null;
+  const value = match ? decodeURIComponent(match[2]) : null;
+  console.log(`Cookie ${name} value present:`, !!value); // Debug log
+  return value;
 }

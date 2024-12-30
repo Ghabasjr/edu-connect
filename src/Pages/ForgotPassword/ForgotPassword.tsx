@@ -1,11 +1,38 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Box, Heading, Text, Input, Button } from "theme-ui";
+import { forgotPassword } from "../utils/apiService";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/forgot-password2");
+
+  const handleClick = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email) {
+      setError("Email is required");
+      return;
+    }
+
+    try {
+      setError("");
+      const response = await forgotPassword(email);
+      console.log("Forgot password API response:", response);
+      setSuccess(true);
+      navigate("/forgot-password2");
+    } catch (err) {
+      console.error("Forgot password API error:", err);
+      if (err instanceof Error) {
+        setError(err.message || "Failed to send verification code.");
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
   };
+
   return (
     <Box
       sx={{
@@ -20,6 +47,7 @@ const ForgotPassword = () => {
     >
       <Box
         as="form"
+        onSubmit={handleClick}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -31,7 +59,7 @@ const ForgotPassword = () => {
         <Heading
           sx={{
             fontFamily: "Roboto, sans-serif",
-            fontSize: ["32px", "48px", "64px"], // Responsive font sizes
+            fontSize: ["32px", "48px", "64px"],
             fontWeight: 700,
             textAlign: "center",
             lineHeight: 1.2,
@@ -42,30 +70,53 @@ const ForgotPassword = () => {
         <Text
           sx={{
             fontFamily: "Roboto, sans-serif",
-            fontSize: ["16px", "20px", "20px"], // Responsive font sizes
+            fontSize: ["16px", "20px", "20px"],
             fontWeight: 400,
             textAlign: "center",
             lineHeight: 1.5,
-            maxWidth: "90%", // Ensures proper width on smaller screens
+            maxWidth: "90%",
           }}
         >
           Enter your email for instructions
         </Text>
         <Input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           sx={{
             width: "100%",
             maxWidth: "350px",
             padding: "10px",
             fontSize: "16px",
-            // borderRadius: "4px",
             borderTop: "none",
             borderLeft: "none",
             borderRight: "none",
           }}
         />
+        {error && (
+          <Text
+            sx={{
+              color: "red",
+              fontSize: "14px",
+              textAlign: "center",
+            }}
+          >
+            {error}
+          </Text>
+        )}
+        {success && (
+          <Text
+            sx={{
+              color: "green",
+              fontSize: "14px",
+              textAlign: "center",
+            }}
+          >
+            Verification code sent successfully!
+          </Text>
+        )}
         <Button
-          onClick={handleClick}
+          type="submit"
           sx={{
             backgroundColor: "blue",
             color: "white",
