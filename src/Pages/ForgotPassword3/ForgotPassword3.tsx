@@ -97,6 +97,68 @@ const ForgotPassword3 = () => {
             sx={{
               backgroundColor: "#fff",
               borderRadius: "9px",
+              width: ["100%", "350px"], // Full width of the container
+              height: "40px",
+              maxWidth: "600px", // Increased width
+            }}
+          />
+          <IconButton
+            sx={{
+              position: "absolute",
+              top: "50%",
+              right: "10px",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+              background: "transparent",
+              border: "none",
+              outline: "none",
+            }}
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </IconButton>
+        </Box>
+
+        <Box sx={{ position: "relative" }}>
+          <Input
+            placeholder="Confirm password"
+            type={showPassword ? "text" : "password"}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            sx={{
+              backgroundColor: "#fff",
+              borderRadius: "9px",
+              width: ["100%", "350px"], // Full width of the container
+              height: "40px",
+              maxWidth: "600px", // Increased width
+            }}
+          />
+          <IconButton
+            sx={{
+              position: "absolute",
+              top: "50%",
+              right: "10px",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+              background: "transparent",
+              border: "none",
+              outline: "none",
+            }}
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </IconButton>
+        </Box>
+
+        {/* <Box sx={{ position: "relative" }}>
+          <Input
+            placeholder="New password"
+            value={newPassword}
+            type={showPassword ? "text" : "password"}
+            onChange={(e) => setNewPassword(e.target.value)}
+            sx={{
+              backgroundColor: "#fff",
+              borderRadius: "9px",
               width: "100%",
               height: "60px",
               maxWidth: "500px",
@@ -146,7 +208,7 @@ const ForgotPassword3 = () => {
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </IconButton>
-        </Box>
+        </Box> */}
         {errorMessage && (
           <Text sx={{ color: "red", textAlign: "center" }}>{errorMessage}</Text>
         )}
@@ -161,7 +223,7 @@ const ForgotPassword3 = () => {
           sx={{
             backgroundColor: "blue",
             color: "white",
-            width: "100%",
+            width: ["70%", "350px"],
             maxWidth: "350px",
             padding: "10px",
             fontSize: "16px",
