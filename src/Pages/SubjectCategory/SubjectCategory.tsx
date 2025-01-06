@@ -31,7 +31,7 @@ export default function SubjectCategory() {
     setError(null);
 
     const token = getCookie("authToken");
-    console.log("Auth token present:", !!token); // Debug log
+    console.log("Auth token present:", !!token);
 
     if (!token) {
       setError("Authentication token is missing. Please log in again.");
@@ -43,7 +43,7 @@ export default function SubjectCategory() {
       console.log(
         "Attempting to update profile with subjects:",
         selectedSubjects
-      ); // Debug log
+      );
       const response = await updateUserProfile(
         { subjects: selectedSubjects.join(",") },
         token
@@ -52,6 +52,7 @@ export default function SubjectCategory() {
 
       console.log("Attempting navigation to /dashboard");
       navigate("/dash-board");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error("Error details:", err);
       setError(

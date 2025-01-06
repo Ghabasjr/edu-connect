@@ -15,6 +15,7 @@ import NotificationsPage from "./Pages/NotificationsPage/NotificationsPage";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ForgotPassword2 from "./Pages/ForgotPassword2/ForgotPassword2";
 import SetnwePassword from "./Pages/SetnewPassword/SetnwePassword";
+import ForgotPassword3 from "./Pages/ForgotPassword3/ForgotPassword3";
 // import MenuPage from "./Pages/MenuPage/MenuPage";
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/forgot-password2" element={<ForgotPassword2 />} />{" "}
         <Route path="/setnew-password" element={<SetnwePassword />} />
+        <Route path="/forgot-password3" element={<ForgotPassword3 />} />
       </Routes>
     </BrowserRouter>
   );

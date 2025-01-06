@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Box, Heading, Text, Input, Button } from "theme-ui";
-import { forgotPassword } from "../utils/apiService";
+import { forgotPasswordRequest } from "../utils/apiService";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const ForgotPassword = () => {
 
     try {
       setError("");
-      const response = await forgotPassword(email);
+      const response = await forgotPasswordRequest(email);
       console.log("Forgot password API response:", response);
       setSuccess(true);
       navigate("/forgot-password2");

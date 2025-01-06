@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { Box, Button, Heading, Text } from "theme-ui";
-import OTPInput from "../../Components/OtpInput/OtpInput";
+// import { useNavigate } from "react-router-dom";
+import { Box, Heading, Text } from "theme-ui";
 
 const ForgotPassword2 = () => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/");
-  };
+  // const navigate = useNavigate();
+  // const handleClick = () => {
+  //   navigate("/");
+  // };
   return (
     <>
       <Box
@@ -19,6 +18,7 @@ const ForgotPassword2 = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
+          gap: 10,
         }}
       >
         <Box
@@ -34,45 +34,44 @@ const ForgotPassword2 = () => {
           <Heading
             sx={{
               fontFamily: "Roboto, sans-serif",
-              fontSize: ["32px", "48px", "64px"],
+              fontSize: ["32px", "48px", "25px"],
               fontWeight: 700,
               textAlign: "center",
-              lineHeight: 1.2,
+              lineHeight: 1,
             }}
           >
-            Enter your code
+            Confirm your Email address
           </Heading>
           <Text
             sx={{
               fontFamily: "Roboto, sans-serif",
-              fontSize: ["16px", "20px", "24px"], // Responsive font sizes
+              fontSize: ["16px", "20px", "24px"],
               fontWeight: 400,
               textAlign: "center",
               lineHeight: 1.5,
-              maxWidth: "90%", // Ensures proper width on smaller screens
+              maxWidth: "90%",
             }}
           >
-            We sent a code to {}
+            We sent a confirmation Email to:{}
           </Text>
-          <OTPInput />
-          {/* <Input
-            placeholder="Enter your code"
-            sx={{
-              width: "100%",
-              maxWidth: "350px",
-              padding: "10px",
-              fontSize: "16px",
-              // borderRadius: "4px",
-              borderTop: "none",
-              borderLeft: "none",
-              borderRight: "none",
+          <Text
+            style={{
+              fontFamily: "Roboto, sans-serif",
+              // fontSize: ["16px", "20px", "24px"],
+              fontSize: "20px",
+              fontWeight: 400,
+              textAlign: "center",
+              lineHeight: 1.5,
+              maxWidth: "90%",
             }}
-          /> */}
-          <Text>
+          >
+            Check your Email and click on the confirmation link to continue.
+          </Text>
+          <Text sx={{ gap: 20 }}>
             Didn't receive a code?{" "}
             <Link to="/forgot-password">Click to Resend</Link>
           </Text>
-          <Button
+          {/* <Button
             onClick={handleClick}
             sx={{
               backgroundColor: "blue",
@@ -92,7 +91,7 @@ const ForgotPassword2 = () => {
             }}
           >
             Continue
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </>

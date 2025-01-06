@@ -141,6 +141,19 @@ export const updateUserRole = async (
   apiCall(`/update-role/${username}`, "PUT", newRoleDetails, {
     Authorization: `Bearer ${token}`,
   });
-export const forgotPassword = async (email: string) => {
-  return apiCall("/forgot-password", "POST", { email });
+export const forgotPasswordRequest = async (email: string) => {
+  return apiCall("/forgot-password", "POST", {
+    email,
+  });
+};
+export const changePassword = async (
+  token: string,
+  newPassword: string,
+  confirmPassword: string
+) => {
+  return apiCall("/change-password", "POST", {
+    token,
+    newPassword,
+    confirmPassword,
+  });
 };
