@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import { Box, Heading, Text } from "theme-ui";
 
 const ForgotPassword2 = () => {
-  // const navigate = useNavigate();
-  // const handleClick = () => {
-  //   navigate("/");
-  // };
   return (
     <>
       <Box
@@ -21,6 +16,9 @@ const ForgotPassword2 = () => {
           gap: 10,
         }}
       >
+        <Box>
+          <img src="/Group.png" />
+        </Box>
         <Box
           as="form"
           sx={{
@@ -40,7 +38,7 @@ const ForgotPassword2 = () => {
               lineHeight: 1,
             }}
           >
-            Confirm your Email address
+            Reset Password
           </Heading>
           <Text
             sx={{
@@ -52,7 +50,7 @@ const ForgotPassword2 = () => {
               maxWidth: "90%",
             }}
           >
-            We sent a confirmation Email to:{}
+            A link has been sent to:{}
           </Text>
           <Text
             style={{
@@ -71,27 +69,6 @@ const ForgotPassword2 = () => {
             Didn't receive a code?{" "}
             <Link to="/forgot-password">Click to Resend</Link>
           </Text>
-          {/* <Button
-            onClick={handleClick}
-            sx={{
-              backgroundColor: "blue",
-              color: "white",
-              width: "100%",
-              maxWidth: "350px",
-              padding: "10px",
-              fontSize: "16px",
-              fontWeight: "bold",
-              textAlign: "center",
-              borderRadius: "8px",
-              cursor: "pointer",
-              transition: "background-color 0.3s ease",
-              "&:hover": {
-                backgroundColor: "darkblue",
-              },
-            }}
-          >
-            Continue
-          </Button> */}
         </Box>
       </Box>
     </>
