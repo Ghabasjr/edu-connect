@@ -33,7 +33,7 @@ const useLogin = () => {
     setErrorMessage(null);
 
     try {
-      const response = await loginUser(identiifer, password);
+      const response = await loginUser(identifier, password);
       if (response?.message === "Login successful") {
         Cookies.set("authToken", response?.token || "", { expires: 7 });
 
