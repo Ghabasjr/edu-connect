@@ -50,17 +50,59 @@ export const registerUser = async (
   password: string
 ) => apiCall("/register", "POST", { username, email, password });
 
+// export const loginUser = async (
+//   identifier: string,
+//   password: string
+// ): Promise<unknown> => {
+//   try {
+//     // Make the API call using the identifier (username or email) and password.
+//     const response = await fetch("/api/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ identifier, password }),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("Failed to login");
+//     }
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error logging in:", error);
+//     throw error;
+//   }
+// };
+
+export interface LoginResponse {
+  message: string;
+  token: string;
+  isSubjectSelected: boolean;
+}
+
 export const loginUser = async (
-  _username: string,
-  email: string,
+  identifier: string,
   password: string
-) => {
+): Promise<LoginResponse> => {
   try {
-    const result = await apiCall("/login", "POST", { email, password });
-    console.log("Login API Call Result:", result);
-    return result;
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ identifier, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to login");
+    }
+
+    const data: LoginResponse = await response.json();
+    return data;
   } catch (error) {
-    console.error("Login API Call Error:", error);
+    console.error("Error logging in:", error);
     throw error;
   }
 };
