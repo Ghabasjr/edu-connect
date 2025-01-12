@@ -62,63 +62,6 @@ const useLogin = () => {
     }
   };
 
-  // const useLogin = () => {
-  //   const [loading, setLoading] = useState(false);
-  //   const [showPassword, setShowPassword] = useState(false);
-  //   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  //   const navigate = useNavigate();
-
-  //   const togglePasswordVisibility = (event: React.MouseEvent) => {
-  //     event.preventDefault();
-  //     setShowPassword(!showPassword);
-  //   };
-
-  //   const login = async (identifier: string, password: string) => {
-  //     setLoading(true);
-  //     setErrorMessage(null);
-
-  //     try {
-  //       // Log the endpoint and request payload
-  //       const endpoint = "https://secondaryschoolquora.onrender.com/login";
-  //       console.log("Logging in with:", { identifier, password });
-  //       console.log("Making POST request to:", endpoint);
-
-  //       const response = await loginUser(identifier, password);
-
-  //       // Log the raw response
-  //       console.log("API Response:", response);
-
-  //       if (response?.message === "Login successful") {
-  //         Cookies.set("authToken", response?.token || "", { expires: 7 });
-
-  //         if (response?.isSubjectSelected) {
-  //           navigate("/dashboard");
-  //         } else {
-  //           navigate("/subject-category");
-  //         }
-  //       } else if (response?.message === "User not found") {
-  //         setErrorMessage("User not found. Please check your credentials.");
-  //       } else {
-  //         setErrorMessage(response?.message || "Login failed. Try again.");
-  //       }
-  //     } catch (error: any) {
-  //       // Log the error for debugging purposes
-  //       console.error("Login error:", error);
-
-  //       // Provide more detailed feedback based on the error type
-  //       if (error.response?.status === 404) {
-  //         setErrorMessage("Login endpoint not found. Please contact support.");
-  //       } else {
-  //         setErrorMessage(
-  //           error.response?.data?.message ||
-  //             "Something went wrong. Please try again later."
-  //         );
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
   return {
     login,
     loading,
@@ -223,7 +166,7 @@ const SignIn: React.FC = () => {
               <Input
                 id="email"
                 name="email"
-                placeholder="Enter your username or email"
+                placeholder="Enter your email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
