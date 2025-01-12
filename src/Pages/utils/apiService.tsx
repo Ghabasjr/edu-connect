@@ -10,7 +10,7 @@
 // ) => {
 //   const defaultHeaders: Record<string, string> = {
 //     "Content-Type": "application/json",
-//     ...headers, // Allows adding custom headers like Authorization
+//     ...headers,
 //   };
 
 //   try {
@@ -22,7 +22,6 @@
 //     });
 
 //     if (!response.ok) {
-//       // Handle JSON and non-JSON error responses
 //       const isJson = response.headers
 //         .get("content-type")
 //         ?.includes("application/json");
@@ -32,7 +31,6 @@
 //       throw new Error(errorData.message || "An error occurred");
 //     }
 
-//     // Parse the response as JSON
 //     return await response.json();
 //   } catch (error) {
 //     console.error(
@@ -50,32 +48,6 @@
 //   password: string
 // ) => apiCall("/register", "POST", { username, email, password });
 
-// // export const loginUser = async (
-// //   identifier: string,
-// //   password: string
-// // ): Promise<unknown> => {
-// //   try {
-// //     // Make the API call using the identifier (username or email) and password.
-// //     const response = await fetch("/api/login", {
-// //       method: "POST",
-// //       headers: {
-// //         "Content-Type": "application/json",
-// //       },
-// //       body: JSON.stringify({ identifier, password }),
-// //     });
-
-// //     if (!response.ok) {
-// //       throw new Error("Failed to login");
-// //     }
-
-// //     const data = await response.json();
-// //     return data;
-// //   } catch (error) {
-// //     console.error("Error logging in:", error);
-// //     throw error;
-// //   }
-// // };
-
 // export interface LoginResponse {
 //   message: string;
 //   token: string;
@@ -86,25 +58,7 @@
 //   identifier: string,
 //   password: string
 // ): Promise<LoginResponse> => {
-//   try {
-//     const response = await fetch("/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ identifier, password }),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Failed to login");
-//     }
-
-//     const data: LoginResponse = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error("Error logging in:", error);
-//     throw error;
-//   }
+//   return apiCall("/login", "POST", { identifier, password });
 // };
 
 // export const logoutUser = async () => apiCall("/logout", "POST");
@@ -183,22 +137,21 @@
 //   apiCall(`/update-role/${username}`, "PUT", newRoleDetails, {
 //     Authorization: `Bearer ${token}`,
 //   });
-// export const forgotPasswordRequest = async (email: string) => {
-//   return apiCall("/forgot-password", "POST", {
-//     email,
-//   });
-// };
+
+// export const forgotPasswordRequest = async (email: string) =>
+//   apiCall("/forgot-password", "POST", { email });
+
 // export const changePassword = async (
 //   token: string,
 //   newPassword: string,
 //   confirmPassword: string
-// ) => {
-//   return apiCall("/change-password", "POST", {
+// ) =>
+//   apiCall("/change-password", "POST", {
 //     token,
 //     newPassword,
 //     confirmPassword,
 //   });
-// };
+
 // Base URL for the API
 const BASE_URL = "https://secondaryschoolquora.onrender.com";
 
@@ -215,6 +168,9 @@ const apiCall = async (
   };
 
   try {
+    console.log(`Making ${method} request to: ${BASE_URL}${endpoint}`);
+    if (body) console.log("Request body:", body);
+
     const response = await fetch(`${BASE_URL}${endpoint}`, {
       method,
       headers: defaultHeaders,
@@ -222,19 +178,22 @@ const apiCall = async (
       credentials: "include", // Include cookies in the request
     });
 
+    console.log("Response status:", response.status);
+
     if (!response.ok) {
-      // Handle JSON and non-JSON error responses
       const isJson = response.headers
         .get("content-type")
         ?.includes("application/json");
       const errorData = isJson
         ? await response.json()
         : { message: response.statusText };
+      console.error("Error response body:", errorData);
       throw new Error(errorData.message || "An error occurred");
     }
 
-    // Parse the response as JSON
-    return await response.json();
+    const responseData = await response.json();
+    console.log("Response data:", responseData);
+    return responseData;
   } catch (error) {
     console.error(
       `Error in API call to ${endpoint}:`,
@@ -261,6 +220,7 @@ export const loginUser = async (
   identifier: string,
   password: string
 ): Promise<LoginResponse> => {
+  console.log("Login payload:", { identifier, password });
   return apiCall("/login", "POST", { identifier, password });
 };
 

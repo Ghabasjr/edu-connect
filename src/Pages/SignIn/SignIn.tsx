@@ -35,6 +35,7 @@
 
 //     try {
 //       const response = await loginUser(identifier, password);
+
 //       if (response?.message === "Login successful") {
 //         Cookies.set("authToken", response?.token || "", { expires: 7 });
 
@@ -81,10 +82,10 @@
 //     validationSchema: Yup.object({
 //       identifier: Yup.string()
 //         .required("Username or Email is required")
-//         .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, {
-//           excludeEmptyString: true,
-//           message: "Enter a valid username or email",
-//         }),
+//         .matches(
+//           /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[a-zA-Z0-9._-]+)$/,
+//           "Enter a valid username or email"
+//         ),
 //       password: Yup.string()
 //         .min(6, "Password must be at least 6 characters")
 //         .required("Password is required"),
@@ -97,7 +98,6 @@
 //   return (
 //     <Box
 //       sx={{
-//         // maxWidth: 400,
 //         margin: "auto",
 //         height: "100vh",
 //         display: "flex",
@@ -134,9 +134,9 @@
 //         <Text as="h1" sx={{ fontSize: 24, fontWeight: "bold", mt: 2 }}>
 //           EDUCONNECT
 //         </Text>
-//         {/* <Text sx={{ fontSize: 14, color: "gray" }}>Your Academic Home</Text> */}
 //       </Box>
-//       <Box sx={{}}>
+
+//       <Box>
 //         <Box
 //           sx={{
 //             display: "flex",
@@ -155,7 +155,7 @@
 //         <form onSubmit={formik.handleSubmit}>
 //           <Flex sx={{ flexDirection: "column", gap: 3 }}>
 //             <Box>
-//               <Label htmlFor="email">Email</Label>
+//               <Label htmlFor="identifier">Username or Email</Label>
 //               <Input
 //                 id="identifier"
 //                 name="identifier"
@@ -281,7 +281,13 @@ const useLogin = () => {
     setErrorMessage(null);
 
     try {
+      // Log the request payload and endpoint for debugging
+      console.log("Logging in with:", { identifier, password });
+
       const response = await loginUser(identifier, password);
+
+      // Log the response for debugging
+      console.log("API Response:", response);
 
       if (response?.message === "Login successful") {
         Cookies.set("authToken", response?.token || "", { expires: 7 });
@@ -295,6 +301,7 @@ const useLogin = () => {
         setErrorMessage("Invalid credentials. Please try again.");
       }
     } catch (error) {
+      // Log the error details for debugging
       console.error("Login error:", error);
       setErrorMessage("Something went wrong. Please try again later.");
     } finally {
