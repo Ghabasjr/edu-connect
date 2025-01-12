@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import {
   Box,
@@ -19,50 +18,6 @@ import { loginUser } from "../utils/apiService";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import Cookies from "js-cookie";
 
-// const useLogin = () => {
-//   const [loading, setLoading] = useState(false);
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-//   const navigate = useNavigate();
-
-//   const togglePasswordVisibility = (event: React.MouseEvent) => {
-//     event.preventDefault();
-//     setShowPassword(!showPassword);
-//   };
-
-//   const login = async (identifier: string, password: string) => {
-//     setLoading(true);
-//     setErrorMessage(null);
-
-//     try {
-//       // Log the request payload and endpoint for debugging
-//       console.log("Logging in with:", { identifier, password });
-
-//       const response = await loginUser(identifier, password);
-
-//       // Log the response for debugging
-//       console.log("API Response:", response);
-
-//       if (response?.message === "Login successful") {
-//         Cookies.set("authToken", response?.token || "", { expires: 7 });
-
-//         if (response?.isSubjectSelected) {
-//           navigate("/dashboard");
-//         } else {
-//           navigate("/subject-category");
-//         }
-//       } else {
-//         setErrorMessage("Invalid credentials. Please try again.");
-//       }
-//     } catch (error) {
-//       // Log the error details for debugging
-//       console.error("Login error:", error);
-//       setErrorMessage("Something went wrong. Please try again later.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -74,19 +29,17 @@ const useLogin = () => {
     setShowPassword(!showPassword);
   };
 
-  const login = async (identifier: string, password: string) => {
+  const login = async (email: string, password: string) => {
     setLoading(true);
     setErrorMessage(null);
 
     try {
-      // Log the endpoint and request payload
-      const endpoint = "https://secondaryschoolquora.onrender.com/login";
-      console.log("Logging in with:", { identifier, password });
-      console.log("Making POST request to:", endpoint);
+      // Log the request payload and endpoint for debugging
+      console.log("Logging in with:", { email, password });
 
-      const response = await loginUser(identifier, password);
+      const response = await loginUser(email, password);
 
-      // Log the raw response
+      // Log the response for debugging
       console.log("API Response:", response);
 
       if (response?.message === "Login successful") {
@@ -97,28 +50,74 @@ const useLogin = () => {
         } else {
           navigate("/subject-category");
         }
-      } else if (response?.message === "User not found") {
-        setErrorMessage("User not found. Please check your credentials.");
       } else {
-        setErrorMessage(response?.message || "Login failed. Try again.");
+        setErrorMessage("Invalid credentials. Please try again.");
       }
-    } catch (error: any) {
-      // Log the error for debugging purposes
+    } catch (error) {
+      // Log the error details for debugging
       console.error("Login error:", error);
-
-      // Provide more detailed feedback based on the error type
-      if (error.response?.status === 404) {
-        setErrorMessage("Login endpoint not found. Please contact support.");
-      } else {
-        setErrorMessage(
-          error.response?.data?.message ||
-            "Something went wrong. Please try again later."
-        );
-      }
+      setErrorMessage("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
+
+  // const useLogin = () => {
+  //   const [loading, setLoading] = useState(false);
+  //   const [showPassword, setShowPassword] = useState(false);
+  //   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  //   const navigate = useNavigate();
+
+  //   const togglePasswordVisibility = (event: React.MouseEvent) => {
+  //     event.preventDefault();
+  //     setShowPassword(!showPassword);
+  //   };
+
+  //   const login = async (identifier: string, password: string) => {
+  //     setLoading(true);
+  //     setErrorMessage(null);
+
+  //     try {
+  //       // Log the endpoint and request payload
+  //       const endpoint = "https://secondaryschoolquora.onrender.com/login";
+  //       console.log("Logging in with:", { identifier, password });
+  //       console.log("Making POST request to:", endpoint);
+
+  //       const response = await loginUser(identifier, password);
+
+  //       // Log the raw response
+  //       console.log("API Response:", response);
+
+  //       if (response?.message === "Login successful") {
+  //         Cookies.set("authToken", response?.token || "", { expires: 7 });
+
+  //         if (response?.isSubjectSelected) {
+  //           navigate("/dashboard");
+  //         } else {
+  //           navigate("/subject-category");
+  //         }
+  //       } else if (response?.message === "User not found") {
+  //         setErrorMessage("User not found. Please check your credentials.");
+  //       } else {
+  //         setErrorMessage(response?.message || "Login failed. Try again.");
+  //       }
+  //     } catch (error: any) {
+  //       // Log the error for debugging purposes
+  //       console.error("Login error:", error);
+
+  //       // Provide more detailed feedback based on the error type
+  //       if (error.response?.status === 404) {
+  //         setErrorMessage("Login endpoint not found. Please contact support.");
+  //       } else {
+  //         setErrorMessage(
+  //           error.response?.data?.message ||
+  //             "Something went wrong. Please try again later."
+  //         );
+  //       }
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
   return {
     login,
@@ -141,11 +140,11 @@ const SignIn: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      identifier: "",
+      email: "",
       password: "",
     },
     validationSchema: Yup.object({
-      identifier: Yup.string()
+      email: Yup.string()
         .required("Username or Email is required")
         .matches(
           /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[a-zA-Z0-9._-]+)$/,
@@ -156,7 +155,7 @@ const SignIn: React.FC = () => {
         .required("Password is required"),
     }),
     onSubmit: (values) => {
-      login(values.identifier, values.password);
+      login(values.email, values.password);
     },
   });
 
@@ -220,19 +219,19 @@ const SignIn: React.FC = () => {
         <form onSubmit={formik.handleSubmit}>
           <Flex sx={{ flexDirection: "column", gap: 3 }}>
             <Box>
-              <Label htmlFor="identifier">Username or Email</Label>
+              <Label htmlFor="email">Username or Email</Label>
               <Input
-                id="identifier"
-                name="identifier"
+                id="email"
+                name="email"
                 placeholder="Enter your username or email"
-                value={formik.values.identifier}
+                value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 sx={{ bg: "white" }}
               />
-              {formik.touched.identifier && formik.errors.identifier && (
+              {formik.touched.email && formik.errors.email && (
                 <Text sx={{ color: "red", fontSize: 12, mt: 1 }}>
-                  {formik.errors.identifier}
+                  {formik.errors.email}
                 </Text>
               )}
             </Box>

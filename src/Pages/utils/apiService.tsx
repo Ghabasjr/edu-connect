@@ -217,11 +217,11 @@ export interface LoginResponse {
 }
 
 export const loginUser = async (
-  identifier: string,
+  email: string,
   password: string
 ): Promise<LoginResponse> => {
-  console.log("Login payload:", { identifier, password });
-  return apiCall("/login", "POST", { identifier, password });
+  console.log("Login payload:", { email, password });
+  return apiCall("/login", "POST", { email, password });
 };
 
 export const logoutUser = async () => apiCall("/logout", "POST");
